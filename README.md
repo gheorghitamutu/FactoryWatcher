@@ -9,6 +9,8 @@ FactoryWatcher: Sophisticated Component Surveillance
     - [TBD](#tbd)
     - [Migration Reporting Tool (Birds)](#migration-reporting-tool-birds)
     - [Fake News in Real Time](#fake-news-in-real-time)
+    - [IoT in medical domain](#iot-in-medical-domain)
+    - [Smart City](#smart-city)
     - [State of Art - TBD](#state-of-art---tbd)
     - [Papers IoT related - TBD - probably in state of art](#papers-iot-related---tbd---probably-in-state-of-art)
     - [Risk Assessment - TBD](#risk-assessment---tbd)
@@ -33,8 +35,6 @@ Mutu Gheorghiță
 We are discussing here only about the repositories we had access to in order to make a fair assessment.
 
 ### TBD
-- IoT in medical domain
-- Smart City
 - IoT eHealth
 - Car sharing system
 
@@ -73,6 +73,34 @@ We are discussing here only about the repositories we had access to in order to 
         - linking the resource with the pro/con arguments (other resources known by the application) (mapped into history in our application which proves the direction in which the health status of the component evolves)
         - usage of caching methods for faster responses (caching on both frontend and backend)
         - usage of mature library for large text analysis and finding similarities (training our model to get a good accuracy)
+```
+
+### IoT in medical domain
+```
+    IoT in medical domain
+    What can be done/improved:
+        - lack of PRO features
+        - lack of data Encryption
+        - lack of versioning at API level
+
+    What we appreciated:
+        - ability to contact the doctor from the application
+        - automatic alerts in case of an health emergency
+        - performance tests
+```
+
+### Smart City
+```
+    Smart City
+    What can be done/improved:
+        - lack of PRO features
+        - lack of data Encryption
+        - lack of tests
+
+    What we appreciated:
+        - ease of adding new services
+        - use of microservices
+        - available on both Android and Web 
 ```
 
 ### State of Art - TBD
