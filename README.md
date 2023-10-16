@@ -31,7 +31,14 @@ FactoryWatcher: Sophisticated Component Surveillance
         - [An end-to-end big data analytics platform for IoT-enabled smart factories: A case study of battery module assembly system for electric vehicles (2022)](#an-end-to-end-big-data-analytics-platform-for-iot-enabled-smart-factories-a-case-study-of-battery-module-assembly-system-for-electric-vehicles-2022)
         - [iRobot-Factory: An intelligent robot factory based on cognitive manufacturing and edge computing (2018)](#irobot-factory-an-intelligent-robot-factory-based-on-cognitive-manufacturing-and-edge-computing-2018)
         - [A method of NC machine tools intelligent monitoring system in smart factories (2019)](#a-method-of-nc-machine-tools-intelligent-monitoring-system-in-smart-factories-2019)
-    - [Risk Assessment - TBD](#risk-assessment---tbd)
+    - [Risk Assessment](#risk-assessment)
+      - [1. Data Security and Privacy Risks](#1-data-security-and-privacy-risks)
+      - [2. Network Connectivity Risks](#2-network-connectivity-risks)
+      - [3. Device Reliability Risks](#3-device-reliability-risks)
+      - [4. Scalability Risks](#4-scalability-risks)
+      - [5. Data Analytics Risks](#5-data-analytics-risks)
+      - [6. Cost Overruns Risks](#6-cost-overruns-risks)
+      - [7.Interoperability Risks](#7interoperability-risks)
 
 ## Coordinator(s)
 Gavriluț Dragoș Teodor\
@@ -280,4 +287,32 @@ https://www.eworkplace.com/smart-factory
     The construction of effectual connection to bridge the gap between physical machine tools and upper software applications is one of the inherent requirements for smart factories. The difficulties in this issue lies in the lack of effective and appropriate means for real-time data acquisition, storage and processing in monitoring and the post workflows. The rapid advancements in Internet of things (IoT) and information technology have made it possible for the realization of this scheme, which have become an important module of the concepts such as “Industry 4.0”, etc. In this paper, a framework of bi-directional data and control flows between various machine tools and upper-level software system is proposed, within which several key stumbling blocks are presented, and corresponding solutions are subsequently deeply investigated and analyzed. Through monitoring manufacturing big data, potential essential information are extracted, providing useful guides for practical production and enterprise decision-making. Based on the integrated model, an NC machine tool intelligent monitoring and data processing system in smart factories is developed. Typical machine tools, such as Siemens series, are the main objects for investigation. The system validates the concept and performs well in the complex manufacturing environment, which will be a beneficial attempt and gain its value in smart factories.
 ```
 
-### Risk Assessment - TBD
+### Risk Assessment
+
+#### 1. Data Security and Privacy Risks
+Risk: Unauthorized access to sensitive factory data, data breaches, or data leaks.\
+Mitigation: Implement robust encryption, access controls, and regular security audits. Comply with data protection regulations.
+
+#### 2. Network Connectivity Risks
+Risk: Network outages or unstable connections may disrupt data transmission.\
+Mitigation: Implement redundancy in network connections, monitor network health, and have a backup data storage system.
+
+#### 3. Device Reliability Risks
+Risk: IoT devices may fail, leading to data loss or inaccurate readings.\
+Mitigation: Use high-quality, tested devices, conduct regular maintenance, and have a device replacement plan.
+
+#### 4. Scalability Risks
+Risk: Inadequate scalability to handle an increasing number of devices or data.\
+Mitigation: Design the system to scale easily, regularly assess scalability needs, and plan for hardware and software upgrades.
+
+#### 5. Data Analytics Risks
+Risk: Misinterpretation of data or failing to derive meaningful insights.\
+Mitigation: Employ data analytics experts, validate findings, and ensure that data is used effectively.
+
+#### 6. Cost Overruns Risks
+Risk: Exceeding the budget for the IoT project.\
+Mitigation: Thoroughly plan the project budget, track expenses, and adjust as necessary.
+
+####  7.Interoperability Risks
+Risk: Compatibility issues with existing factory systems.\
+Mitigation: Ensure compatibility testing and work on integration solutions.
