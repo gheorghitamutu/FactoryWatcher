@@ -1,4 +1,5 @@
 # FactoryWatcher
+
 FactoryWatcher: Sophisticated Component Surveillance
 
 - [FactoryWatcher](#factorywatcher)
@@ -41,19 +42,46 @@ FactoryWatcher: Sophisticated Component Surveillance
       - [7.Interoperability Risks](#7interoperability-risks)
 
 ## Coordinator(s)
+
 Gavriluț Dragoș Teodor\
 TBD
 
 ## Team members
+
 Gherghe Tudor-Alexandru\
-Smog George-Marian (*)\
+Smog George-Marian (\*)\
 Mutu Gheorghiță
 
 \* Team Leader (negociates points, asseses the current type of the project, clarifies misunderstandings related to the tasks at hands)
 
 ## Project description
-- TBD
-- Pro features - TBD
+
+FactoryWatcher is an innovative Internet of Things (IoT) project designed to monitor and monitor factory operations in real time. In today's fast-paced manufacturing environment, ensuring operational efficiency, safety, and sustainability are paramount. FactoryWatcher addresses these concerns by leveraging IoT technology to develop a comprehensive solution to monitor and manage various aspects of factory operations.
+
+Project goals:
+
+1. Real-time monitoring: FactoryWatcher provides real-time data on critical aspects of factory operations. This includes machine performance, energy consumption, environmental conditions and the status of various production processes.
+   2.Security and Compliance: The system continuously monitors for security violations and compliance issues, including: B. Detects and alerts you to potential threats and ensures compliance with safety protocols and regulatory standards.
+2. Predictive Maintenance: FactoryWatcher uses predictive analytics to predict equipment maintenance needs. This proactive approach minimizes unplanned downtime, reduces maintenance costs, and increases overall production efficiency.
+3. Data Analytics: Collected data is stored and analyzed to identify patterns and trends, providing valuable insights for process optimization, cost reduction, and overall operational improvement.
+4. User-friendly interface: The FactoryWatcher system has a user-friendly interface that can be accessed through web and mobile applications. This allows factory managers and employees to access real-time data, receive alerts, and make informed decisions to improve factory efficiency and safety.
+
+Main components:
+
+1. Sensors: Deploy a network of sensors throughout the factory to collect data on mechanical, environmental, and safety parameters.
+2. Data collection: Collect data from sensors and send it securely to a central server.
+3. Data Analytics: Implement machine learning and AI algorithms to analyze data and generate actionable insights.
+4. Alarm System: Establish a robust alarm mechanism to notify factory management and employees of critical events and potential problems.
+5. User Interface: Develop easy-to-use web and mobile interfaces to access real-time data, reports, and alerts.
+6. Cloud Infrastructure: Leverage cloud-based storage and computing resources for scalability and data accessibility.
+7. Security and Compliance: Implement rigorous security measures to protect sensitive factory data and ensure compliance with data protection regulations.
+
+Advantage:
+
+1. Improve operational efficiency
+2. Reduce downtime and maintenance costs
+3. Improved security and compliance
+4. Data-driven decision making for process optimization
 
 ## Related Work (past years)
 
@@ -63,7 +91,7 @@ We are discussing here only about the repositories we had access to (public) in 
 
 ```
     Migration Reporting Tool (Birds) - real-time generation of interactive map regading the migrations performed by various entities
-    
+
     What can be done/improved:
     - lack of PRO features
     - lack of integration with data analysis tools for frontend
@@ -72,8 +100,8 @@ We are discussing here only about the repositories we had access to (public) in 
     - lack of versioning at API level
     - queries hardcoded -> possibility to make an SQL Injection
     - usage of SQL in a context in which documents may vary in what concernes existing fields
-    - no clusterisation methods to augment data in documents 
-    
+    - no clusterisation methods to augment data in documents
+
     What we appreciated:
     - usage of cos similarity as an own implementation
     - intuitive frontend
@@ -84,7 +112,7 @@ We are discussing here only about the repositories we had access to (public) in 
 
 ```
     Fake News in Real Time - deciding the trustworthiness of news
-    
+
     What can be done/improved:
     - lack of PRO features
     - lack of auth layer
@@ -97,6 +125,7 @@ We are discussing here only about the repositories we had access to (public) in 
 ```
 
 ### IoT in medical domain
+
 ```
     IoT in medical domain
     What can be done/improved:
@@ -111,6 +140,7 @@ We are discussing here only about the repositories we had access to (public) in 
 ```
 
 ### Smart City
+
 ```
     Smart City
     What can be done/improved:
@@ -121,14 +151,15 @@ We are discussing here only about the repositories we had access to (public) in 
     What we appreciated:
         - ease of adding new services
         - use of microservices
-        - available on both Android and Web 
+        - available on both Android and Web
 ```
 
-### State of Art 
+### State of Art
 
 #### Domain terms
 
 ##### IoT (Internet of things)
+
 ```
     https://en.wikipedia.org/wiki/Internet_of_things
 
@@ -136,6 +167,7 @@ We are discussing here only about the repositories we had access to (public) in 
 ```
 
 #### IIot (Internet of things)
+
 ```
     https://en.wikipedia.org/wiki/Industrial_internet_of_things
 
@@ -143,6 +175,7 @@ We are discussing here only about the repositories we had access to (public) in 
 ```
 
 ##### Edge computing
+
 ```
     https://en.wikipedia.org/wiki/Edge_computing
 
@@ -154,12 +187,13 @@ We are discussing here only about the repositories we had access to (public) in 
 ```
 
 ##### Manufacturing/Industry 4.0
+
 ```
     From Wikipedia:
     https://en.wikipedia.org/wiki/Fourth_Industrial_Revolution
 
-    "Fourth Industrial Revolution", "4IR", or "Industry 4.0"is a buzzword neologism describing rapid technologicaladvancement in the 21st century. 
-        
+    "Fourth Industrial Revolution", "4IR", or "Industry 4.0"is a buzzword neologism describing rapid technologicaladvancement in the 21st century.
+
     The term was popularised in 2016 by Klaus Schwab, theWorld Economic Forum founder and executive chairman, whosays that the changes show a significant shift inindustrial capitalism.
 
     A part of this phase of industrial change is the joiningof     technologies like artificial intelligence, geneediting, to     advanced robotics that blur the linesbetween the physical,     digital, and biological worlds.
@@ -191,6 +225,7 @@ https://www.eworkplace.com/smart-factory
 #### Academic Papers in IoT area
 
 ##### Practical Guide to Smart Factory Transition Using IoT, Big Data and Edge Analytics (2021)
+
 ```
     https://ieeexplore.ieee.org/abstract/document/8478188
 
@@ -199,6 +234,7 @@ https://www.eworkplace.com/smart-factory
 ```
 
 ##### Mobility-aware hierarchical fog computing framework for Industrial Internet of Things (IIoT) (2022)
+
 ```
     https://journalofcloudcomputing.springeropen.com/articles/10.1186/s13677-022-00345-y
 
@@ -207,6 +243,7 @@ https://www.eworkplace.com/smart-factory
 ```
 
 ##### Advances in Sensor Technologies in the Era of Smart Factory and Industry 4.0 (2020)
+
 ```
     https://www.mdpi.com/1424-8220/20/23/6783
 
@@ -215,6 +252,7 @@ https://www.eworkplace.com/smart-factory
 ```
 
 ##### Impact of IoT on Manufacturing Industry 4.0: A New Triangular Systematic Review (2021)
+
 ```
     https://www.mdpi.com/2071-1050/13/22/12506
 
@@ -223,6 +261,7 @@ https://www.eworkplace.com/smart-factory
 ```
 
 ##### IoT, IIoT and Cyber-Physical Systems Integration in the SEPT Learning Factory (2019)
+
 ```
     https://www.sciencedirect.com/science/article/pii/S2351978919303828
 
@@ -231,6 +270,7 @@ https://www.eworkplace.com/smart-factory
 ```
 
 ##### An Internet of Things Approach for Water Efficiency: A Case Study of the Beverage Factory (2021)
+
 ```
     https://www.mdpi.com/2071-1050/13/6/3343
 
@@ -239,23 +279,26 @@ https://www.eworkplace.com/smart-factory
 ```
 
 ##### Energy-Efficient Edge Offloading in Heterogeneous Industrial IoT Networks for Factory of Future (2020)
+
 ```
-    https://ieeexplore.ieee.org/abstract/document/9216066 
+    https://ieeexplore.ieee.org/abstract/document/9216066
 
     Abstract:
     The ultra-reliable and low latency communication (URLLC) and massive machine type communication (mMTC) in 5G are envisioned to support intelligent automation in the heterogeneous Factory of Future (FoF) networks, and Mobile-edge computing (MEC) is considered to be a promising system for enabling real-time task processing at the edge of the network. In the future factory, production machines, and environmental monitoring devices will be endowed with the wireless connecting for mobility. These devices are deployed for running complicated real-time tasks. To make such mission-critical tasks being processed in time, parts of the tasks should be completed with the assistance of the edge server or even the cloud. In this work, we jointly investigate the partial task offloading, computation, and communication (licensed and unlicensed) resource allocation problem in the trade-off between overall power consumption and quality of service (QoS) satisfaction. A 2-tier MEC-cloud framework is provided, wherein the IoT mobile devices (MDs) are able to partition the tasks into segments and offload them to the MEC and the cloud server. Considering the limits of communication and computation resources, we proposed a mechanism call 5G and NR-U opportunity-cost-based offloading algorithm (5G/NR-U OCBOA) to optimize resource allocation. Within the mechanism, there are two proposed algorithms, 5G OCBOA is for the licensed-only case, and NR-U OCBOA dedicates on unlicensed one. We iteratively perform the two algorithms to get the final solution. The simulation results show that our low-complexity algorithms almost outperform the other benchmark greedy algorithms. The proposed algorithm is up to 59.3% MD blocking probability less, up to 58.7% power saving gain, and up to 47.6% more QoS gain.
 ```
 
 ##### Towards IoT-driven Process Event Log Generation for Conformance Checking in Smart Factories (2020)
+
 ```
-    https://ieeexplore.ieee.org/document/9233283 
+    https://ieeexplore.ieee.org/document/9233283
     https://orbit.dtu.dk/files/222359998/2020_fopas.pdf
 
     Abstract:
     The Internet of Things (IoT) enables software-based access to vast amounts of data streams from sensors measuring physical and virtual properties of smart devices and their surroundings. While sophisticated means for the control and data analysis of single IoT devices exist, a more process-oriented view of IoT systems is often missing. Such a lack of process awareness hinders the development of process-based systems on top of IoT environments and the application of process mining techniques for process analysis and optimization in IoT. We propose a framework for the stepwise correlation and composition of raw IoT sensor streams with events and activities on a process level based on Complex Event Processing (CEP). From this correlation we derive refined process event logs-possibly with ambiguities-that can be used for process analysis at runtime (i. e., online). We discuss the framework using examples from a smart factory.
 ```
 
-#####  Internet of Things for Smart Factories in Industry 4.0, A Review (2023)
+##### Internet of Things for Smart Factories in Industry 4.0, A Review (2023)
+
 ```
     https://www.researchgate.net/publication/370264717_Internet_of_Things_for_Smart_Factories_in_Industry_40_A_Review
 
@@ -264,6 +307,7 @@ https://www.eworkplace.com/smart-factory
 ```
 
 ##### An end-to-end big data analytics platform for IoT-enabled smart factories: A case study of battery module assembly system for electric vehicles (2022)
+
 ```
     https://www.sciencedirect.com/science/article/pii/S0278612522000450
 
@@ -272,6 +316,7 @@ https://www.eworkplace.com/smart-factory
 ```
 
 ##### iRobot-Factory: An intelligent robot factory based on cognitive manufacturing and edge computing (2018)
+
 ```
     https://www.sciencedirect.com/science/article/abs/pii/S0167739X1831183X
 
@@ -280,8 +325,9 @@ https://www.eworkplace.com/smart-factory
 ```
 
 ##### A method of NC machine tools intelligent monitoring system in smart factories (2019)
+
 ```
-    https://www.sciencedirect.com/science/article/abs/pii/S0736584518301960 
+    https://www.sciencedirect.com/science/article/abs/pii/S0736584518301960
 
     Abstract
     The construction of effectual connection to bridge the gap between physical machine tools and upper software applications is one of the inherent requirements for smart factories. The difficulties in this issue lies in the lack of effective and appropriate means for real-time data acquisition, storage and processing in monitoring and the post workflows. The rapid advancements in Internet of things (IoT) and information technology have made it possible for the realization of this scheme, which have become an important module of the concepts such as “Industry 4.0”, etc. In this paper, a framework of bi-directional data and control flows between various machine tools and upper-level software system is proposed, within which several key stumbling blocks are presented, and corresponding solutions are subsequently deeply investigated and analyzed. Through monitoring manufacturing big data, potential essential information are extracted, providing useful guides for practical production and enterprise decision-making. Based on the integrated model, an NC machine tool intelligent monitoring and data processing system in smart factories is developed. Typical machine tools, such as Siemens series, are the main objects for investigation. The system validates the concept and performs well in the complex manufacturing environment, which will be a beneficial attempt and gain its value in smart factories.
@@ -290,29 +336,36 @@ https://www.eworkplace.com/smart-factory
 ### Risk Assessment
 
 #### 1. Data Security and Privacy Risks
+
 Risk: Unauthorized access to sensitive factory data, data breaches, or data leaks.\
 Mitigation: Implement robust encryption, access controls, and regular security audits. Comply with data protection regulations.
 
 #### 2. Network Connectivity Risks
+
 Risk: Network outages or unstable connections may disrupt data transmission.\
 Mitigation: Implement redundancy in network connections, monitor network health, and have a backup data storage system.
 
 #### 3. Device Reliability Risks
+
 Risk: IoT devices may fail, leading to data loss or inaccurate readings.\
 Mitigation: Use high-quality, tested devices, conduct regular maintenance, and have a device replacement plan.
 
 #### 4. Scalability Risks
+
 Risk: Inadequate scalability to handle an increasing number of devices or data.\
 Mitigation: Design the system to scale easily, regularly assess scalability needs, and plan for hardware and software upgrades.
 
 #### 5. Data Analytics Risks
+
 Risk: Misinterpretation of data or failing to derive meaningful insights.\
 Mitigation: Employ data analytics experts, validate findings, and ensure that data is used effectively.
 
 #### 6. Cost Overruns Risks
+
 Risk: Exceeding the budget for the IoT project.\
 Mitigation: Thoroughly plan the project budget, track expenses, and adjust as necessary.
 
-####  7.Interoperability Risks
+#### 7.Interoperability Risks
+
 Risk: Compatibility issues with existing factory systems.\
 Mitigation: Ensure compatibility testing and work on integration solutions.
