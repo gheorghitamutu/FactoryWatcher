@@ -50,22 +50,22 @@ TBD
 ## Team members
 
 Gherghe Tudor-Alexandru\
-Smog George-Marian (\*)\
+Smoc George-Marian (\*)\
 Mutu Gheorghiță
 
 \* Team Leader (negociates points, asseses the current type of the project, clarifies misunderstandings related to the tasks at hands)
 
 ## Project description
 
-FactoryWatcher is an innovative Internet of Things (IoT) project designed to monitor and monitor factory operations in real time. In today's fast-paced manufacturing environment, ensuring operational efficiency, safety, and sustainability are paramount. FactoryWatcher addresses these concerns by leveraging IoT technology to develop a comprehensive solution to monitor and manage various aspects of factory operations.
+FactoryWatcher is an innovative Internet of Things (IoT) project designed to monitor factory operations in real time. In today's fast-paced manufacturing environment, ensuring operational efficiency, safety, and sustainability are paramount. FactoryWatcher addresses these concerns by leveraging IoT technology to develop a comprehensive solution to monitor and manage various aspects of factory operations.
 
 Project goals:
 
 1. Real-time monitoring: FactoryWatcher provides real-time data on critical aspects of factory operations. This includes machine performance, energy consumption, environmental conditions and the status of various production processes.
-   2.Security and Compliance: The system continuously monitors for security violations and compliance issues, including: B. Detects and alerts you to potential threats and ensures compliance with safety protocols and regulatory standards.
-2. Predictive Maintenance: FactoryWatcher uses predictive analytics to predict equipment maintenance needs. This proactive approach minimizes unplanned downtime, reduces maintenance costs, and increases overall production efficiency.
-3. Data Analytics: Collected data is stored and analyzed to identify patterns and trends, providing valuable insights for process optimization, cost reduction, and overall operational improvement.
-4. User-friendly interface: The FactoryWatcher system has a user-friendly interface that can be accessed through web and mobile applications. This allows factory managers and employees to access real-time data, receive alerts, and make informed decisions to improve factory efficiency and safety.
+2. Security and Compliance: The system continuously monitors for security violations and compliance issues, detects and alerts users in case of potential threats and ensures compliance with safety protocols and regulatory standards.
+3. Predictive Maintenance: FactoryWatcher uses predictive analytics to predict equipment maintenance needs. This proactive approach minimizes unplanned downtime, reduces maintenance costs, and increases overall production efficiency.
+4. Data Analytics: Collected data is stored and analyzed to identify patterns and trends, providing valuable insights for process optimization, cost reduction, and overall operational improvement.
+5. User-friendly interface: The FactoryWatcher system has a user-friendly interface that can be accessed through web and mobile applications. This allows factory managers and employees to access real-time data, receive alerts, and make informed decisions to improve factory efficiency and safety.
 
 Main components:
 
