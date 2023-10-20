@@ -25,17 +25,23 @@ Industrial Internet of Things (IIoT) projects involve multiple types of diagrams
 - Failure Mode and Effects Analysis (FMEA) Diagram: A systematic approach to identifying and mitigating potential failure modes and their effects in the IIoT system.
 - Energy and Resource Usage Diagram: the power and resource consumption of various components in the IIoT system, sustainability focused.
 
-The C4 model, or Context, Containers, Components, and Code model, is a set of abstractions for visualizing and describing the architecture of software systems. While it is primarily used for software architecture, it can be adapted and extended for the architecture of an IIoT (Industrial Internet of Things) project.If we are using the C4 approach we have:
-- Context Diagram (Level 1):
-    - System Context: The outermost layer represents the entire IIoT system within its broader context. This might include external systems, stakeholders, and the surrounding environment that interacts with or influences the IIoT system.
-- Container Diagram (Level 2):
+The [C4 model](https://c4model.com), or Context, Containers, Components, and Code model, is a set of abstractions for visualizing and describing the architecture of software systems. While it is primarily used for software architecture, it can be adapted and extended for the architecture of an IIoT (Industrial Internet of Things) project. If we are using the C4 approach we have:
+- System Context Diagram (Level 1): the outermost layer represents the entire IIoT system within its broader context. This might include external systems, stakeholders, and the surrounding environment that interacts with or influences the IIoT system. A System Context diagram is a good starting point for diagramming and documenting a software system, allowing you to step back and see the big picture.
+- Container Diagram (Level 2): once you understand how your system fits in to the overall IT environment, a really useful next step is to zoom-in to the system boundary with a Container diagram.
     - Containers: In the context of an IIoT project, containers might represent high-level system components or subsystems that handle specific functions. This could include Edge devices, Cloud platforms, and Communication Middleware.
     - Interfaces: Show how these containers interact with each other and external entities.
-- Component Diagram (Level 3):
+- Component Diagram (Level 3): next you can zoom in and decompose each container further to identify the major structural building blocks and their interactions.
     - Components: Within the containers, you can represent individual software components or modules responsible for specific tasks or services. For an IIoT project, this could include data processing components, analytics modules, data storage components, etc.
     - Dependencies: Illustrate the relationships and dependencies between these components.
-- Code Diagram (Level 4):
-    - In traditional software architecture, this level delves into the code structure of each component. In an IIoT project, this might involve diving deeper into the specifics of each software component that handles IIoT data processing, such as data ingestion and transformation algorithms.
+- Code Diagram (Level 4): Finally, you can zoom in to each component to show how it is implemented as code; using UML class diagrams, entity relationship diagrams or similar. In traditional software architecture, this level delves into the code structure of each component. In an IIoT project, this might involve diving deeper into the specifics of each software component that handles IIoT data processing, such as data ingestion and transformation algorithms.
+
+As C4 model diagrams we also have:
+- System Landscape diagram: the C4 model provides a static view of a single software system but, in the real-world, software systems never live in isolation. For this reason, and particularly if you are responsible for a collection/portfolio of software systems, it's often useful to understand how all of these software systems fit together within a given enterprise, organisation, department, etc. Essentially this is a map of the software systems within the chosen scope, with a C4 drill-down for each software system of interest.
+- Dynamic diagram: a dynamic diagram can be useful when you want to show how elements in the static model collaborate at runtime to implement a user story, use case, feature, etc. This dynamic diagram is based upon a UML communication diagram (previously known as a "UML collaboration diagram"). It is similar to a UML sequence diagram although it allows a free-form arrangement of diagram elements with numbered interactions to indicate ordering.
+- Deployment diagram: a deployment diagram allows you to illustrate how instances of software systems and/or containers in the static model are deployed on to the infrastructure within a given deployment environment (e.g. production, staging, development, etc). It's based upon a UML deployment diagram.
+
+C4 and UML
+Although the example diagrams above are created using a "boxes and lines" notation, the core diagrams can be illustrated using UML with the appropriate use of packages, components and stereotypes. The resulting UML diagrams do tend to lack the same degree of descriptive text though, because adding such text isn't possible (or easy) with some UML tools.
 
 Our focus should also be on the users of the product:
 - User Personas: Create user personas that represent different categories of users or actors. Describe their characteristics, needs, and goals. These personas can help in designing user interfaces and functionalities tailored to specific user groups.
