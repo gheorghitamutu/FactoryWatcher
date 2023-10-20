@@ -3,6 +3,51 @@ An overview of the types of diagrams included in this project, the assigments of
 
 - [Overview](#overview)
 - [Bibliography](#bibliography)
+- [Diagrams type](#diagrams-type)
+
+# Diagrams type
+We're depicting here various diagrams for our project that focus on product design, architecture or user interaction along with sustenability or feedback loops.
+
+Industrial Internet of Things (IIoT) projects involve multiple types of diagrams to illustrate different aspects of the project:
+- System Architecture Diagram: an overview of the entire IIoT system, including sensors, devices, communication protocols, cloud platforms, and data analytics components.
+- Network Topology Diagram: inteconnection between devices and sensors in the IIoT system, including wired and wireless connections.
+- Sensor Deployment Diagram: tthe placement of sensors and actuators in the industrial environment; it helps in understanding how data is collected from different points.
+- Data Flow Diagram: illustrates how data flows through the IIoT system, from sensors to cloud-based applications, including data preprocessing and storage.
+- Message Sequence Diagram: the flow of messages and interactions between various components of the IIoT system, including how devices communicate and share data.
+- Cloud Architecture Diagram: cloud infrastructure and services used to process and store data; it includes components like databases, storage, and analytics tools.
+- Edge Computing Diagram: the edge computing infrastructure, where data is processed at or near the data source before being sent to the cloud; it includes edge devices and gateways.
+- Data Storage Diagram: how data is stored in databases or other storage systems, emphasizing data structures and organization.
+- Data Analytics Flowchart: data analytics pipeline, showing how raw data is transformed and analyzed to generate insights or trigger actions.
+- Security Architecture Diagram: the security measures and protocols in place to protect the IIoT system from cyber threats, including firewalls, encryption, and access controls.
+- User Interface (UI) Mockups: UI mockups depict how users interact with the system through dashboards and control interfaces.
+- Compliance and Regulation Diagram: how the IIoT system complies with industry-specific regulations and standards, ensuring it meets legal requirements.
+- Maintenance and Monitoring Diagram: how the IIoT system is monitored for performance, and how maintenance tasks are scheduled and executed.
+- Failure Mode and Effects Analysis (FMEA) Diagram: A systematic approach to identifying and mitigating potential failure modes and their effects in the IIoT system.
+- Energy and Resource Usage Diagram: the power and resource consumption of various components in the IIoT system, sustainability focused.
+
+The C4 model, or Context, Containers, Components, and Code model, is a set of abstractions for visualizing and describing the architecture of software systems. While it is primarily used for software architecture, it can be adapted and extended for the architecture of an IIoT (Industrial Internet of Things) project.If we are using the C4 approach we have:
+- Context Diagram (Level 1):
+    - System Context: The outermost layer represents the entire IIoT system within its broader context. This might include external systems, stakeholders, and the surrounding environment that interacts with or influences the IIoT system.
+- Container Diagram (Level 2):
+    - Containers: In the context of an IIoT project, containers might represent high-level system components or subsystems that handle specific functions. This could include Edge devices, Cloud platforms, and Communication Middleware.
+    - Interfaces: Show how these containers interact with each other and external entities.
+- Component Diagram (Level 3):
+    - Components: Within the containers, you can represent individual software components or modules responsible for specific tasks or services. For an IIoT project, this could include data processing components, analytics modules, data storage components, etc.
+    - Dependencies: Illustrate the relationships and dependencies between these components.
+- Code Diagram (Level 4):
+    - In traditional software architecture, this level delves into the code structure of each component. In an IIoT project, this might involve diving deeper into the specifics of each software component that handles IIoT data processing, such as data ingestion and transformation algorithms.
+
+Our focus should also be on the users of the product:
+- User Personas: Create user personas that represent different categories of users or actors. Describe their characteristics, needs, and goals. These personas can help in designing user interfaces and functionalities tailored to specific user groups.
+- User Role Matrix: Develop a matrix that outlines the different user roles in the IIoT system and their associated permissions and responsibilities. This is particularly important for access control and security planning.
+- Use Case Diagrams: Use case diagrams can show how different actors interact with the system to achieve specific goals or tasks. Actors are represented as stick figures, and their interactions with the system are depicted as use cases.
+- User Flow Diagrams: Create diagrams that illustrate the step-by-step user interactions within the system. These diagrams can help in designing user interfaces and understanding the user journey.
+- Dashboard Wireframes: If the IIoT system includes user dashboards, you can create wireframes or mockups that depict how users interact with the system through these interfaces.
+- User Access and Authentication Diagram: Show how different users or actors authenticate and access the system, including login processes and authentication methods.
+- Alert and Notification Flowcharts: Outline how the system communicates with users or actors in the event of alarms, alerts, or notifications, including the channels and timing of these communications.
+- User Training and Support Materials: While not diagrams, providing training materials and support documentation for users and actors is essential. This might include user manuals, video tutorials, and knowledge bases.
+- User Feedback and Improvement Loop: Define how users can provide feedback on the system, report issues, and suggest improvements. Create a process flow or feedback loop to incorporate user feedback into system enhancements.
+- Maintenance and Operator Roles: If your IIoT system involves maintenance personnel or operators, create diagrams or documents that detail their roles and responsibilities in system upkeep and management.
 
 # Bibliography
 https://github.com/ByteByteGoHq/system-design-101 (System Design 101)\
