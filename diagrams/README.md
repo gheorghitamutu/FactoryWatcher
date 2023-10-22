@@ -70,3 +70,5 @@ https://www.mdpi.com/1424-8220/18/6/1676 (Collaborative Working Architecture for
 https://www.avsystem.com/blog/iot/what-is-iot-architecture (What is IoT architecture?)\
 https://www.altexsoft.com/blog/iot-architecture-layers-components (IoT Architecture: the Pathway from Physical Signals to Business Decisions)\
 https://dgtlinfra.com/internet-of-things-iot-architecture (Internet of Things (IoT) Architecture: Layers Explained)
+https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=d3626bf1ca937dba0a452a1c31a751d79fc38953 (Using Aspects in Architectural Description)
+https://www.researchgate.net/publication/221116951_Aspect_Diagrams_for_UML_Activity_Models (Aspect Diagrams for UML Activity Models)
