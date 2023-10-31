@@ -532,7 +532,7 @@ These kind of approach can easily generate an authentication system in a matter 
 It turns out that you can also plug the generated DAO into an ORM, whose example of Entity Framework Core 3.0 I will outline below and effectively derive data-base schema out of it too.
 
 We create a new project name `c_sharp_model_generation` using the command `dotnet new console -o c_sharp_model_generation` and then we add the following dependencies:
-```
+```csharp
 dotnet add package Microsoft.EntityFrameworkCore.Design
 dotnet add package Microsoft.EntityFrameworkCore.Sqlite
 dotnet add package Grpc.Tools
@@ -540,6 +540,7 @@ dotnet add package Google.Protobuf
 ```
 
 You then create a `Database.cs` file as it follows:
+```csharp
 
 using Google.Protobuf;
 using Microsoft.EntityFrameworkCore;
