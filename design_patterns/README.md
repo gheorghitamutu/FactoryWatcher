@@ -45,9 +45,11 @@ The key difference lies in their scope and focus:
 While they serve different purposes, there might be instances where both sets of patterns could be applied in building complex IIoT systems that involve intricate software architectures for handling industrial data and interactions among devices.
 
 ## Design Patterns in IIoT
-Industrial Internet of Things (IIoT) design patterns refer to reusable solutions to common problems and challenges encountered when developing IIoT systems. These patterns help create scalable, robust, and efficient architectures for managing and processing data in industrial environments.
+Industrial Internet of Things (IIoT) design patterns refer to reusable solutions to common problems and challenges encountered when developing IIoT systems. These patterns help create scalable, robust, and efficient architectures for managing and processing data in industrial environments. 
 
-Several design patterns are commonly employed in IIoT:
+Azure has an in-depth enumeration and explanation of Cloud Design Patterns here: [Cloud Design Patterns](https://learn.microsoft.com/en-us/azure/architecture/patterns/).
+
+Some cloud design patterns are commonly employed in IIoT:
 1. Pub-Sub (Publisher/Subscriber)
    - Utilized for communication between various devices, sensors, and applications. Devices publish data to specific topics, and other devices or applications subscribe to these topics to receive the data they are interested in. This pattern enables a loosely coupled architecture and facilitates scalability. This pattern involves a messaging system where sensors or devices publish data to a broker. Other devices or applications can subscribe to the broker to receive the data they need.
 2. Edge Computing
@@ -67,12 +69,16 @@ Several design patterns are commonly employed in IIoT:
 9. Time Series Data Storage
    - Specialized databases or storage systems designed for handling time-series data efficiently are crucial in IIoT. These patterns enable storing, querying, and analyzing data collected over time, such as sensor readings and operational data.
 10. Dynamic Scaling
-   - This pattern involves the ability of the IIoT system to dynamically scale resources based on demand. It ensures that the system can handle fluctuating workloads, such as increased data volume during peak times.
+    - This pattern involves the ability of the IIoT system to dynamically scale resources based on demand. It ensures that the system can handle fluctuating workloads, such as increased data volume during peak times.
 11. Sensor Aggregation Pattern
-   - This pattern involves aggregating data from multiple sensors to gain a broader understanding of a system or environment. It addresses the challenge of handling data from numerous sensors scattered across various locations and provides a unified view of the collected data.
+    - This pattern involves aggregating data from multiple sensors to gain a broader understanding of a system or environment. It addresses the challenge of handling data from numerous sensors scattered across various locations and provides a unified view of the collected data.
 
 
 These design patterns in IIoT aim to address various challenges encountered in industrial environments, ranging from data management, security, and communication to predictive analytics and system scalability. Combining these patterns can lead to robust, efficient, and scalable IIoT solutions.
+
+Addressing these patterns in Azure is exemplified here: [Industrial IoT patterns](https://learn.microsoft.com/en-us/azure/architecture/guide/iiot-patterns/iiot-patterns-overview).
+
+![IIoT Maturity](iiot-maturity.png)
 
 ## Exploring the architecture
 These are several IoT architecture types that we took into account:
@@ -88,6 +94,10 @@ These are several IoT architecture types that we took into account:
    1. Event-driven architecture focuses on capturing and processing events triggered by IoT devices. It leverages messaging systems or event-driven frameworks to handle data ingestion, event routing, and subsequent actions. This pattern enables real-time event processing, asynchronous communication, and flexible integration with various systems. Event-driven architecture is well-suited for applications that require event correlation, complex workflows, and event-driven actions.
 
 While exploring the system's scope we reached the agreement that a combination of **Centralized** with **Event-Driven** architectures would suite our case. We also took into account [IoT Design Patterns: Computational Constructs to Design, Build and Engineer Edge Applications](https://conferences.computer.org/iotDI/prev/2016/papers/9948a277.pdf).
+
+An generic architecture example in Azure can be is in-depth explained here: [Azure industrial IoT analytics guidance](https://learn.microsoft.com/en-us/azure/architecture/guide/iiot-guidance/iiot-architecture).
+
+![IIoT Architecture](iiot-architecture.png)
 
 # Protobuf
 Protocol buffers (Protobufs) are a popular choice for serializing structured data in Industrial Internet of Things (IIoT) systems. They provide a platform-independent and language-independent way to define the structure of  data, streamlining communication between devices and systems.
@@ -156,7 +166,6 @@ message ProductionLineInfo {
   repeated Product products = 2;
   // Additional production line information fields can be added here
 }
-
 ```
 
 ### Alarm System Events

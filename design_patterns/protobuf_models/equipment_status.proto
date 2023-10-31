@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+enum EquipmentStatus {
+  OK = 0;
+  WARNING = 1;
+  ERROR = 2;
+}
+
+message Equipment {
+  int32 equipment_id = 1;
+  EquipmentStatus status = 2;
+  string message = 3;
+  // Additional equipment status fields can be added here
+}
