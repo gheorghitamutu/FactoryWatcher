@@ -228,7 +228,80 @@ class Program
     - This pattern involves the ability of the IIoT system to dynamically scale resources based on demand. It ensures that the system can handle fluctuating workloads, such as increased data volume during peak times.
 12. Sensor Aggregation Pattern
     - This pattern involves aggregating data from multiple sensors to gain a broader understanding of a system or environment. It addresses the challenge of handling data from numerous sensors scattered across various locations and provides a unified view of the collected data.
+``` charp
+using System;
+using System.Collections.Generic;
 
+// Define a Sensor class to represent individual sensors.
+class Sensor
+{
+    public string Name { get; set; }
+    public double Value { get; set; }
+
+    public Sensor(string name)
+    {
+        Name = name;
+    }
+
+    public void ReadSensorValue()
+    {
+        // Simulate reading sensor data.
+        Random rand = new Random();
+        Value = rand.NextDouble() * 100.0;
+    }
+}
+
+// Define an Aggregator class to aggregate data from multiple sensors.
+class DataAggregator
+{
+    private List<Sensor> sensors;
+
+    public DataAggregator()
+    {
+        sensors = new List<Sensor>();
+    }
+
+    public void AddSensor(Sensor sensor)
+    {
+        sensors.Add(sensor);
+    }
+
+    public void AggregateData()
+    {
+        foreach (var sensor in sensors)
+        {
+            sensor.ReadSensorValue();
+        }
+    }
+
+    public void ReportAggregatedData()
+    {
+        foreach (var sensor in sensors)
+        {
+            Console.WriteLine($"Sensor: {sensor.Name}, Value: {sensor.Value}");
+        }
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Create sensor objects and add them to the aggregator.
+        Sensor sensor1 = new Sensor("Sensor 1");
+        Sensor sensor2 = new Sensor("Sensor 2");
+
+        DataAggregator aggregator = new DataAggregator();
+        aggregator.AddSensor(sensor1);
+        aggregator.AddSensor(sensor2);
+
+        // Simulate data aggregation and reporting.
+        aggregator.AggregateData();
+        aggregator.ReportAggregatedData();
+    }
+}
+
+```
 
 These design patterns in IIoT aim to address various challenges encountered in industrial environments, ranging from data management, security, and communication to predictive analytics and system scalability. Combining these patterns can lead to robust, efficient, and scalable IIoT solutions.
 
