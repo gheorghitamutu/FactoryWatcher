@@ -7,6 +7,7 @@
     - [Comparison](#comparison)
   - [Design Patterns in IIoT](#design-patterns-in-iiot-1)
   - [Exploring the architecture](#exploring-the-architecture)
+- [Protobuf](#protobuf)
   - [Bibliography](#bibliography)
 
 ## Design Patterns
@@ -24,15 +25,15 @@ Key areas addressed by IIoT design patterns include:
 The GoF design patterns, introduced in the book "Design Patterns: Elements of Reusable Object-Oriented Software," comprise a set of general-purpose design patterns for object-oriented software development. These patterns are more abstract and applicable to a wide range of software development domains and languages, focusing on design problems within software systems.
 
 The GoF patterns are classified into three categories:
-> Creational Patterns: Addressing object creation mechanisms.
-> Structural Patterns: Concerned with the composition of classes or objects.
+> Creational Patterns: Addressing object creation mechanisms.\
+> Structural Patterns: Concerned with the composition of classes or objects.\
 > Behavioral Patterns: Focusing on object collaboration and responsibility.
 
 These patterns, such as Singleton, Factory Method, Adapter, Observer, Strategy, and others, are designed to solve common software design issues, including object instantiation, composition, interaction between objects, and encapsulating behavior.
 
 ### Comparison
 The key difference lies in their scope and focus:
-> Scope: IIoT patterns are specific to the industrial domain, dealing with challenges unique to interconnected devices, sensor networks, edge computing, and industrial data processing. GoF patterns, on the other hand, are more general and abstract, applicable across various software domains.
+> Scope: IIoT patterns are specific to the industrial domain, dealing with challenges unique to interconnected devices, sensor networks, edge computing, and industrial data processing. GoF patterns, on the other hand, are more general and abstract, applicable across various software domains.\
 > Focus: IIoT patterns target problems related to data flow, real-time processing, security, and device interaction in the industrial setting. GoF patterns focus on object-oriented design concepts and solutions for software structure, behavior, and creation.
 
 While they serve different purposes, there might be instances where both sets of patterns could be applied in building complex IIoT systems that involve intricate software architectures for handling industrial data and interactions among devices.
@@ -81,6 +82,22 @@ These are several IoT architecture types that we took into account:
    1. Event-driven architecture focuses on capturing and processing events triggered by IoT devices. It leverages messaging systems or event-driven frameworks to handle data ingestion, event routing, and subsequent actions. This pattern enables real-time event processing, asynchronous communication, and flexible integration with various systems. Event-driven architecture is well-suited for applications that require event correlation, complex workflows, and event-driven actions.
 
 While exploring the system's scope we reached the agreement that a combination of **Centralized** with **Event-Driven** architectures would suite our case. We also took into account [IoT Design Patterns: Computational Constructs to Design, Build and Engineer Edge Applications](https://conferences.computer.org/iotDI/prev/2016/papers/9948a277.pdf).
+
+# Protobuf
+Protocol buffers (Protobufs) are a popular choice for serializing structured data in Industrial Internet of Things (IIoT) systems. They provide a platform-independent and language-independent way to define the structure of  data, streamlining communication between devices and systems.
+
+Protobufs are used in IIoT as it follows:
+1. **Efficient Data Serialization**: Protobufs provide a compact and efficient binary representation of structured data. In IIoT, where there's a vast amount of data transmitted between devices and systems, this efficient serialization helps reduce the size of the payload, leading to improved transmission speed and reduced bandwidth usage.
+2. **Interoperability**: Protobufs support multiple programming languages, allowing different systems and devices, regardless of their underlying technology or platform, to exchange data seamlessly. This interoperability is crucial in IIoT, where various devices from different manufacturers might need to communicate with one another.
+3. **Versioning and Evolution**: IIoT systems often evolve over time, with changes in the data structure and the introduction of new fields or parameters. Protobuf supports backward and forward compatibility, allowing fields to be added or removed without breaking compatibility with older versions, making it easier to version control your IIoT systems. 
+4. **Schema definition**: Protobuf uses schemas to define the structure of data. This schema acts as a contract that defines the format of the data, making it easier to validate and analyze incoming data. This is especially valuable in IIoT systems where data consistency is important. 
+5. **Reduced overhead**: The binary format used by Protobufs and the ability to define a schema tailored to the specific data exchanged in IIoT systems leads to reduced overhead compared to other text-based serialization formats like JSON or XML.
+6. **Support for Embedded Systems**: In IIoT, where devices might have limited resources, Protobufs' compact binary format and the ability to generate code for resource-constrained devices make it a favorable choice for communication even in edge devices.
+7. **Streaming and Real-Time Processing**: Protobufs support streaming, allowing the transmission of data in smaller chunks, making it suitable for real-time data processing, a critical requirement in many IIoT applications.
+
+Protobufs offer various advantages but they also come with some considerations. These include the necessity of additional tooling for code generation, an initial learning curve for defining the schema, and the need for well-defined communication protocols for effectively exchanging data.
+
+The use of Protocol Buffers in IIoT contributes significantly to efficient data exchange, interoperability, and streamlined communication between various devices and systems within the industrial landscape.
 
 ## Bibliography
 https://dev.to/zhukmax/bridging-the-gap-understanding-adapter-and-composite-patterns-in-rust-50ab (Bridging the Gap: Understanding Adapter and Composite Patterns in Rust)\
