@@ -56,7 +56,83 @@ Azure has an in-depth enumeration and explanation of Cloud Design Patterns here:
 
 Some cloud design patterns are commonly employed in IIoT:
 1. Pub-Sub (Publisher/Subscriber)
-   - Utilized for communication between various devices, sensors, and applications. Devices publish data to specific topics, and other devices or applications subscribe to these topics to receive the data they are interested in. This pattern enables a loosely coupled architecture and facilitates scalability. This pattern involves a messaging system where sensors or devices publish data to a broker. Other devices or applications can subscribe to the broker to receive the data they need.
+   - Utilized for communication between various devices, sensors, and applications. Devices publish data to specific topics, and other devices or applications subscribe to these topics to receive the data they are interested in. This pattern enables a loosely coupled architecture and facilitates scalability. This pattern involves a messaging system where sensors or devices publish data to a broker. Other devices or applications can subscribe to the broker to receive the data they need. A situation in which publisher subscriber pattern can be used is when dealing with data sent using pika library via RabbitMQ:
+
+```csharp
+using System;
+using RabbitMQ.Client;
+using System.Text;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        var factory = new ConnectionFactory() { HostName = "localhost" };
+        using (var connection = factory.CreateConnection())
+        using (var channel = connection.CreateModel())
+        {
+            channel.ExchangeDeclare("my_exchange", ExchangeType.Fanout);
+
+            while (true)
+            {
+                Console.Write("Enter a message to publish (or 'exit' to quit): ");
+                string message = Console.ReadLine();
+
+                if (message.ToLower() == "exit")
+                    break;
+
+                var body = Encoding.UTF8.GetBytes(message);
+                channel.BasicPublish(exchange: "my_exchange",
+                                     routingKey: "",
+                                     basicProperties: null,
+                                     body: body);
+                Console.WriteLine($" [x] Sent: {message}");
+            }
+        }
+    }
+}
+```
+The subscriber has to use a queue that is bound at that specific exchange:
+``` csharp
+using System;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
+using System.Text;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        var factory = new ConnectionFactory() { HostName = "localhost" };
+        using (var connection = factory.CreateConnection())
+        using (var channel = connection.CreateModel())
+        {
+            channel.ExchangeDeclare("my_exchange", ExchangeType.Fanout);
+            var queueName = channel.QueueDeclare().QueueName;
+            channel.QueueBind(queue: queueName,
+                              exchange: "my_exchange",
+                              routingKey: "");
+
+            Console.WriteLine(" [*] Waiting for messages. To exit, press CTRL+C");
+
+            var consumer = new EventingBasicConsumer(channel);
+            consumer.Received += (model, ea) =>
+            {
+                var body = ea.Body;
+                var message = Encoding.UTF8.GetString(body);
+                Console.WriteLine($" [x] Received: {message}");
+            };
+
+            channel.BasicConsume(queue: queueName,
+                                 autoAck: true,
+                                 consumer: consumer);
+
+            Console.WriteLine(" Press [enter] to exit.");
+            Console.ReadLine();
+        }
+    }
+}
+```
 2. Edge Computing
    - In IIoT, Edge Computing involves processing data closer to the source (at the edge) rather than relying solely on centralized cloud systems. This pattern helps in reducing latency, enabling real-time processing, and reducing the amount of data that needs to be sent to the cloud, which can be critical in industrial settings with limited bandwidth or where real-time responses are necessary.
 3. Device Shadowing
@@ -316,7 +392,7 @@ dotnet add package Google.Protobuf
 ```
 
 You then create a `Database.cs` file as it follows:
-```csharp
+
 using Google.Protobuf;
 using Microsoft.EntityFrameworkCore;
 
