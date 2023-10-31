@@ -7,8 +7,9 @@ enum EquipmentStatus {
 }
 
 message Equipment {
-  int32 equipment_id = 1;
-  EquipmentStatus status = 2;
-  string message = 3;
+  int64 id = 1;
+  int32 equipment_id = 2;
+  EquipmentStatus status = 3;
+  string message = 4;
   // Additional equipment status fields can be added here
 }

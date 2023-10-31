@@ -1,8 +1,9 @@
 syntax = "proto3";
 
 message AlarmEvent {
-  int32 alarm_id = 1;
-  string alarm_description = 2;
-  int64 timestamp = 3;
+  int64 id = 1;
+  int32 alarm_id = 2;
+  string alarm_description = 3;
+  int64 timestamp = 4;
   // Additional alarm event fields can be added here
 }
