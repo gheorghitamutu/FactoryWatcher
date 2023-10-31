@@ -14,6 +14,7 @@
     - [Production Line Information](#production-line-information)
     - [Alarm System Events](#alarm-system-events)
   - [Code generation (models \& classes) from Protobufs (language agnostic)](#code-generation-models--classes-from-protobufs-language-agnostic)
+    - [Rust](#rust)
   - [Bibliography](#bibliography)
 
 ## Design Patterns
@@ -181,7 +182,123 @@ message AlarmEvent {
 ```
 
 ## Code generation (models & classes) from Protobufs (language agnostic)
-WIP
+We are able to create models and classes from .proto files in a variety of languages. We picked Rust and C# as examples.
+
+### Rust
+We first create a new project **rust_model_generation** via command **cargo new rust_model_generation** followed by its dependencies added in `Cargo.toml` file:
+```
+[package]
+name = "rust_model_generation"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+prost = "0.12.1"
+prost-build = "0.12.1"
+```
+Then we add in `main.rs` file the following:
+```rs
+fn main() {
+    prost_build::compile_protos(&[ // array of files
+            "alarm_system_event.proto", 
+            "equipment_status.proto", 
+            "product_line_information.proto", 
+            "sensor_data.proto"], 
+            &["../protobuf_models"]) // the folder
+        .unwrap();
+}
+```
+We run `RUST_BACKTRACE=full OUT_DIR="." cargo run` command and we get all the models ready to be used in a file called `_.rs`:
+```rs
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct AlarmEvent {
+    #[prost(int32, tag = "1")]
+    pub alarm_id: i32,
+    #[prost(string, tag = "2")]
+    pub alarm_description: ::prost::alloc::string::String,
+    /// Additional alarm event fields can be added here
+    #[prost(int64, tag = "3")]
+    pub timestamp: i64,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Equipment {
+    #[prost(int32, tag = "1")]
+    pub equipment_id: i32,
+    #[prost(enumeration = "EquipmentStatus", tag = "2")]
+    pub status: i32,
+    /// Additional equipment status fields can be added here
+    #[prost(string, tag = "3")]
+    pub message: ::prost::alloc::string::String,
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord, ::prost::Enumeration)]
+#[repr(i32)]
+pub enum EquipmentStatus {
+    Ok = 0,
+    Warning = 1,
+    Error = 2,
+}
+impl EquipmentStatus {
+    /// String value of the enum field names used in the ProtoBuf definition.
+    ///
+    /// The values are not transformed in any way and thus are considered stable
+    /// (if the ProtoBuf definition does not change) and safe for programmatic use.
+    pub fn as_str_name(&self) -> &'static str {
+        match self {
+            EquipmentStatus::Ok => "OK",
+            EquipmentStatus::Warning => "WARNING",
+            EquipmentStatus::Error => "ERROR",
+        }
+    }
+    /// Creates an enum from field names used in the ProtoBuf definition.
+    pub fn from_str_name(value: &str) -> ::core::option::Option<Self> {
+        match value {
+            "OK" => Some(Self::Ok),
+            "WARNING" => Some(Self::Warning),
+            "ERROR" => Some(Self::Error),
+            _ => None,
+        }
+    }
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct Product {
+    #[prost(int32, tag = "1")]
+    pub product_id: i32,
+    #[prost(string, tag = "2")]
+    pub product_name: ::prost::alloc::string::String,
+    #[prost(float, tag = "3")]
+    pub weight: f32,
+    /// Additional product information fields can be added here
+    #[prost(int32, tag = "4")]
+    pub quantity: i32,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ProductionLineInfo {
+    #[prost(int32, tag = "1")]
+    pub line_id: i32,
+    /// Additional production line information fields can be added here
+    #[prost(message, repeated, tag = "2")]
+    pub products: ::prost::alloc::vec::Vec<Product>,
+}
+#[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct TemperatureData {
+    #[prost(int32, tag = "1")]
+    pub sensor_id: i32,
+    #[prost(float, tag = "2")]
+    pub temperature_celsius: f32,
+    /// Additional sensor data fields can be added here
+    #[prost(int64, tag = "3")]
+    pub timestamp: i64,
+}
+```
+These kind of approach can easily generate an authentication system in a matter of minutes as exemplified here: [Roll your own auth with Rust and Protobuf](https://dev.to/martinp/roll-your-own-auth-with-rust-and-protobuf-24ke) and you can use various patterns with your models as exposed here: [Bridging the Gap: Understanding Adapter and Composite Patterns in Rust](https://dev.to/zhukmax/bridging-the-gap-understanding-adapter-and-composite-patterns-in-rust-50ab) keeping in mind the Edge computing imperatives mentioned in [Industrial IoT Architecture Patterns - AWS Whitepaper](https://docs.aws.amazon.com/pdfs/whitepapers/latest/industrial-iot-architecture-patterns/industrial-iot-architecture-patterns.pdf#industrial-iot-architecture-patterns):
+![Edge Computing Imperatives](aws-edge-computing-imperatives.png)
 
 ## Bibliography
 [Bridging the Gap: Understanding Adapter and Composite Patterns in Rust](https://dev.to/zhukmax/bridging-the-gap-understanding-adapter-and-composite-patterns-in-rust-50ab)\
