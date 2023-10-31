@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+message Product {
+  int64 id = 1;
+  string name = 2;
+  float weight = 3;
+  int32 quantity = 4;
+  // Additional product information fields can be added here
+}
+
+message ProductionLineInfo {
+  int64 id = 1;
+  repeated Product products = 2;
+  // Additional production line information fields can be added here
+}
