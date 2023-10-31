@@ -228,7 +228,7 @@ class Program
     - This pattern involves the ability of the IIoT system to dynamically scale resources based on demand. It ensures that the system can handle fluctuating workloads, such as increased data volume during peak times.
 12. Sensor Aggregation Pattern
     - This pattern involves aggregating data from multiple sensors to gain a broader understanding of a system or environment. It addresses the challenge of handling data from numerous sensors scattered across various locations and provides a unified view of the collected data.
-``` charp
+``` csharp
 using System;
 using System.Collections.Generic;
 
