@@ -133,25 +133,100 @@ class Program
     }
 }
 ```
-2. Edge Computing
+2. Stategy for accessing db objects for different use cases:
+``` csharp
+using System;
+using System.Collections.Generic;
+using MongoDB.Bson;
+using MongoDB.Driver;
+
+// Define projection strategy interface
+interface IProjectionStrategy
+{
+    ProjectionDefinition<BsonDocument, BsonDocument> GetProjection();
+}
+
+// Concrete projection strategies
+class BasicProjection : IProjectionStrategy
+{
+    public ProjectionDefinition<BsonDocument, BsonDocument> GetProjection()
+    {
+        return Builders<BsonDocument>.Projection.Exclude("_id").Include("name").Include("age");
+    }
+}
+
+class DetailedProjection : IProjectionStrategy
+{
+    public ProjectionDefinition<BsonDocument, BsonDocument> GetProjection()
+    {
+        return Builders<BsonDocument>.Projection.Exclude("_id").Include("name").Include("age").Include("email");
+    }
+}
+
+// MongoDB client and database setup
+class MongoDBContext
+{
+    private IMongoDatabase database;
+
+    public MongoDBContext(string connectionString, string databaseName)
+    {
+        var client = new MongoClient(connectionString);
+        database = client.GetDatabase(databaseName);
+    }
+
+    public IMongoCollection<BsonDocument> GetCollection(string collectionName)
+    {
+        return database.GetCollection<BsonDocument>(collectionName);
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        string connectionString = "mongodb://localhost:27017";
+        string databaseName = "mydb";
+        string collectionName = "mycollection";
+
+        // Initialize the MongoDB context
+        MongoDBContext context = new MongoDBContext(connectionString, databaseName);
+        IMongoCollection<BsonDocument> collection = context.GetCollection(collectionName);
+
+        // Choose a projection strategy based on user preferences
+        IProjectionStrategy projectionStrategy = new DetailedProjection(); // Change to BasicProjection for a basic projection
+
+        // Query MongoDB with the selected projection strategy
+        var documents = collection.Find(new BsonDocument())
+            .Project(projectionStrategy.GetProjection())
+            .ToList();
+
+        foreach (var document in documents)
+        {
+            Console.WriteLine(document.ToJson());
+        }
+    }
+}
+
+```
+3. Edge Computing
    - In IIoT, Edge Computing involves processing data closer to the source (at the edge) rather than relying solely on centralized cloud systems. This pattern helps in reducing latency, enabling real-time processing, and reducing the amount of data that needs to be sent to the cloud, which can be critical in industrial settings with limited bandwidth or where real-time responses are necessary.
-3. Device Shadowing
+4. Device Shadowing
    - A pattern commonly used in IIoT for maintaining a virtual representation (shadow) of a physical device. This shadow maintains the current state of the device and can be used for synchronization, enabling more efficient communication, and enabling quick access to device information without directly interacting with the physical device.
-4. Security Patterns
+5. Security Patterns
    - Security is a critical concern in IIoT. Patterns like Role-based Access Control (RBAC), encryption, secure bootstrapping, and secure communication protocols (such as TLS) are crucial for securing communications, data, and devices in an IIoT ecosystem.
-5. Batching and Buffering
+6. Batching and Buffering
    - Implementing systems that can handle intermittent connectivity and varying data rates is essential. Batching and buffering patterns enable the collection of data from sensors or devices and then transmitting it in optimized batches, reducing network traffic and improving efficiency.
-6. Data Normalization and Transformation
+7. Data Normalization and Transformation
    - IIoT systems often deal with data from disparate sources, in different formats. This pattern involves standardizing and transforming data into a common format for processing and analysis, facilitating interoperability among different devices and systems.
-7. Predictive Maintenance
+8. Predictive Maintenance
    - By analyzing historical data and real-time sensor data, predictive maintenance patterns help in predicting when equipment might fail, allowing for maintenance before an actual breakdown, thereby reducing downtime and costs.
-8. Digital Twin
+9. Digital Twin
    - Creating digital representations of physical assets or processes helps in simulation, monitoring, and analysis. Digital twins enable better understanding and optimization of physical systems, aiding in predictive analysis and decision-making.
-9. Time Series Data Storage
+10. Time Series Data Storage
    - Specialized databases or storage systems designed for handling time-series data efficiently are crucial in IIoT. These patterns enable storing, querying, and analyzing data collected over time, such as sensor readings and operational data.
-10. Dynamic Scaling
+11. Dynamic Scaling
     - This pattern involves the ability of the IIoT system to dynamically scale resources based on demand. It ensures that the system can handle fluctuating workloads, such as increased data volume during peak times.
-11. Sensor Aggregation Pattern
+12. Sensor Aggregation Pattern
     - This pattern involves aggregating data from multiple sensors to gain a broader understanding of a system or environment. It addresses the challenge of handling data from numerous sensors scattered across various locations and provides a unified view of the collected data.
 
 
