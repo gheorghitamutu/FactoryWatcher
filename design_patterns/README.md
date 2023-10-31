@@ -8,6 +8,12 @@
   - [Design Patterns in IIoT](#design-patterns-in-iiot-1)
   - [Exploring the architecture](#exploring-the-architecture)
 - [Protobuf](#protobuf)
+  - [IIoT output as Protobuf](#iiot-output-as-protobuf)
+    - [Sensor Data](#sensor-data)
+    - [Equipment Status](#equipment-status)
+    - [Production Line Information](#production-line-information)
+    - [Alarm System Events](#alarm-system-events)
+  - [Code generation (models \& classes) from Protobufs (language agnostic)](#code-generation-models--classes-from-protobufs-language-agnostic)
   - [Bibliography](#bibliography)
 
 ## Design Patterns
@@ -99,22 +105,91 @@ Protobufs offer various advantages but they also come with some considerations. 
 
 The use of Protocol Buffers in IIoT contributes significantly to efficient data exchange, interoperability, and streamlined communication between various devices and systems within the industrial landscape.
 
+## IIoT output as Protobuf
+
+We exemplified here several Protobuf IIoT outputs that we can use.
+
+### Sensor Data
+```
+syntax = "proto3";
+
+message TemperatureData {
+  int32 sensor_id = 1;
+  float temperature_celsius = 2;
+  int64 timestamp = 3;
+  // Additional sensor data fields can be added here
+}
+```
+
+### Equipment Status
+```
+syntax = "proto3";
+
+enum EquipmentStatus {
+  OK = 0;
+  WARNING = 1;
+  ERROR = 2;
+}
+
+message Equipment {
+  int32 equipment_id = 1;
+  EquipmentStatus status = 2;
+  string message = 3;
+  // Additional equipment status fields can be added here
+}
+```
+
+### Production Line Information
+```
+syntax = "proto3";
+
+message Product {
+  int32 product_id = 1;
+  string product_name = 2;
+  float weight = 3;
+  int32 quantity = 4;
+  // Additional product information fields can be added here
+}
+
+message ProductionLineInfo {
+  int32 line_id = 1;
+  repeated Product products = 2;
+  // Additional production line information fields can be added here
+}
+
+```
+
+### Alarm System Events
+```
+syntax = "proto3";
+
+message AlarmEvent {
+  int32 alarm_id = 1;
+  string alarm_description = 2;
+  int64 timestamp = 3;
+  // Additional alarm event fields can be added here
+}
+```
+
+## Code generation (models & classes) from Protobufs (language agnostic)
+WIP
+
 ## Bibliography
-https://dev.to/zhukmax/bridging-the-gap-understanding-adapter-and-composite-patterns-in-rust-50ab (Bridging the Gap: Understanding Adapter and Composite Patterns in Rust)\
-https://dev.to/martinp/roll-your-own-auth-with-rust-and-protobuf-24ke (Roll your own auth with Rust and Protobuf)\
-https://docs.aws.amazon.com/pdfs/whitepapers/latest/industrial-iot-architecture-patterns/industrial-iot-architecture-patterns.pdf#industrial-iot-architecture-patterns (Industrial IoT Architecture Patterns)\
-https://hillside.net/plop/2016/papers/writinggroup/17.2.pdf (Pattern language for IoT applications)\
-https://d-nb.info/1232177768/34 (An Overview of Design Patterns for Self-Adaptive Systems in the Context of the Internet of Things)
-https://www.iaas.uni-stuttgart.de/publications/INPROC-2016-46-Internet-of-Things-Patterns.pdf (Internet of Things Patterns)\
-https://www.sciencedirect.com/science/article/abs/pii/S0167739X23002017 (Internet of Things design patterns modeling proven correct by construction: Application to aged care solution)\
-https://par.nsf.gov/servlets/purl/10066528 (Design Patterns for the Industrial Internet of Things)\
-https://learn.microsoft.com/en-us/azure/architecture/guide/iiot-patterns/iiot-patterns-overview (Industrial IoT patterns)\
-https://machinekoder.com/machinetalk-explained-part-5-code-generation (Machinetalk explained Part 5: Code Generation)\
-https://www.linkedin.com/pulse/streamline-microservices-development-protobuf-based-code-ansel-castro (Streamline microservices development with a protobuf-based code generator)\
-https://medium.com/@kamil.skalski/using-google-protocol-buffers-as-data-definition-language-for-entity-framework-core-storage-a130e5bfc71f (Using Google Protocol Buffers as data definition language for Entity Framework Core storage)\
-https://medium.com/@costastselios/iot-patterns-managed-iot-data-services-350c17df2d8b (IoT Patterns — Managed IoT Data Services)\
-https://www.linkedin.com/pulse/exploring-iot-architecture-patterns-building-future-himanshu-shah (Exploring IoT Architecture Patterns: Building the Future of Connectivity!)\
-https://nmsl.cs.nthu.edu.tw/wp-content/uploads/2011/10/images_groupmeeting_1116-PH.pdf (IoT Design Patterns: Computational Constructs to Design, Build and Engineer Edge Applications)\
-https://link.springer.com/chapter/10.1007/978-3-031-09593-1_3 (Modeling IoT Design Patterns Proven Correct by Construction)\
-https://community.arm.com/arm-community-blogs/b/internet-of-things-blog/posts/design-patterns-for-an-internet-of-things (Design Patterns for the Internet of Things)\
-https://www.linkedin.com/pulse/10-trending-design-patterns-iot-solutions-vishal-bhardwaj (10 Trending Design Patterns in IoT Solutions and Architectures)
+[Bridging the Gap: Understanding Adapter and Composite Patterns in Rust](https://dev.to/zhukmax/bridging-the-gap-understanding-adapter-and-composite-patterns-in-rust-50ab)\
+[Roll your own auth with Rust and Protobuf](https://dev.to/martinp/roll-your-own-auth-with-rust-and-protobuf-24ke)\
+[Industrial IoT Architecture Patterns](https://docs.aws.amazon.com/pdfs/whitepapers/latest/industrial-iot-architecture-patterns/industrial-iot-architecture-patterns.pdf#industrial-iot-architecture-patterns)\
+[Pattern language for IoT applications](https://hillside.net/plop/2016/papers/writinggroup/17.2.pdf)\
+[An Overview of Design Patterns for Self-Adaptive Systems in the Context of the Internet of Things](https://d-nb.info/1232177768/34)
+[Internet of Things Patterns](https://www.iaas.uni-stuttgart.de/publications/INPROC-2016-46-Internet-of-Things-Patterns.pdf)\
+[Internet of Things design patterns modeling proven correct by construction: Application to aged care solution](https://www.sciencedirect.com/science/article/abs/pii/S0167739X23002017)\
+[Design Patterns for the Industrial Internet of Things](https://par.nsf.gov/servlets/purl/10066528)\
+[Industrial IoT patterns](https://learn.microsoft.com/en-us/azure/architecture/guide/iiot-patterns/iiot-patterns-overview)\
+[Machinetalk explained Part 5: Code Generation](https://machinekoder.com/machinetalk-explained-part-5-code-generation)\
+[Streamline microservices development with a protobuf-based code generator](https://www.linkedin.com/pulse/streamline-microservices-development-protobuf-based-code-ansel-castro)\
+[Using Google Protocol Buffers as data definition language for Entity Framework Core storage](https://medium.com/@kamil.skalski/using-google-protocol-buffers-as-data-definition-language-for-entity-framework-core-storage-a130e5bfc71f)\
+[IoT Patterns — Managed IoT Data Services](https://medium.com/@costastselios/iot-patterns-managed-iot-data-services-350c17df2d8b)\
+[Exploring IoT Architecture Patterns: Building the Future of Connectivity!](https://www.linkedin.com/pulse/exploring-iot-architecture-patterns-building-future-himanshu-shah)\
+[IoT Design Patterns: Computational Constructs to Design, Build and Engineer Edge Applications](https://nmsl.cs.nthu.edu.tw/wp-content/uploads/2011/10/images_groupmeeting_1116-PH.pdf)\
+[Modeling IoT Design Patterns Proven Correct by Construction](https://link.springer.com/chapter/10.1007/978-3-031-09593-1_3)\
+[Design Patterns for the Internet of Things](https://community.arm.com/arm-community-blogs/b/internet-of-things-blog/posts/design-patterns-for-an-internet-of-things)\
+[10 Trending Design Patterns in IoT Solutions and Architectures](https://www.linkedin.com/pulse/10-trending-design-patterns-iot-solutions-vishal-bhardwaj)
