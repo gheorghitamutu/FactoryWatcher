@@ -123,5 +123,21 @@ Azure Network Watcher provides a suite of tools to monitor, diagnose, view metri
 | Managed Identity                                | [Info](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview) | A common challenge for developers is the management of secrets, credentials, certificates, and keys used to secure communication between services. Managed identities eliminate the need for developers to manage these credentials. While developers can securely store the secrets in Azure Key Vault, services need a way to access Azure Key Vault. Managed identities provide an automatically managed identity in Microsoft Entra ID for applications to use when connecting to resources that support Microsoft Entra authentication. Applications can use managed identities to obtain Microsoft Entra tokens without having to manage any credentials. | 
 | Storage account                                 | [Info](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview) | An Azure storage account contains all of your Azure Storage data objects: blobs, files, queues, and tables. The storage account provides a unique namespace for your Azure Storage data that's accessible from anywhere in the world over HTTP or HTTPS. Data in your storage account is durable and highly available, secure, and massively scalable. |
 
+## Costs involved (3 test/simulation deployments with no actual data/devices connected)
+| ResourceGroup	    | Resource	                                                           | ResourceType	             | Cost	       | Currency |
+| ----------------- | -------------------------------------------------------------------- | --------------------------- | ----------- | -------- |
+| iiot_simulation	| iothub-6v75hq_[25348359]	                                           | IoT Hub	                 | 0.762313652 | EUR      |
+| iiot_simulation	| iothub-6v75hq_[25348386]	                                           | IoT Hub	                 | 0.762313652 | EUR      |
+| iiot_simulation	| iothub-6v75hq_[25348410]	                                           | IoT Hub	                 | 0.762313652 | EUR      |
+| iiot_simulation	| wingat-h2zeibq	                                                   | Virtual machine	         | 0.189153388 | EUR      |
+| iiot_simulation	| wingat-h2zeibq-sim0	                                               | Virtual machine	         | 0.152128327 | EUR      |
+| iiot_simulation	| linuxgateway0-w5lgkwl-sim0                                           | Virtual machine	         | 0.149985673 | EUR      |
+| iiot_simulation	| linuxgateway0-w5lgkwl	                                               | Virtual machine	         | 0.075952303 | EUR      |
+| iiot_simulation	| wingat-h2zeibq_osdisk_1_b08a744f902745a58871f415bfdb82f3	           | Disk	                     | 0.028465375 | EUR      |
+| iiot_simulation	| linuxgateway0-w5lgkwl_osdisk_1_4e27560a414b443eac60582bdfed7fac	   | Disk	                     | 0.002016735 | EUR      |
+| iiot_simulation	| linuxgateway0-w5lgkwl-sim0_osdisk_1_cb2e67ff0ec045debec591519d9bf384 | Disk	                     | 0.002016735 | EUR      |
+| iiot_simulation	| wingat-h2zeibq-sim0_osdisk_1_95bf44ab52ee4f01afa47a32792c4891	       | Disk	                     | 0.002016735 | EUR      |
+| iiot_simulation	| dps6v75hq	                                                           | Device Provisioning Service | 0.000756215 | EUR      |
+
 # Stage 3
 To be implemented: extend samples or develop new components.
