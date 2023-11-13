@@ -55,7 +55,21 @@ PCS_IMAGES_TAG=2.8.2
 
 It can be used to locally develop new components along with testing the examples from `samples` folder.
 
-The current state of the IIoT system is represented by the following diagram:
+## Architecture 
+Azure OPC Publisher and the optional Industrial IoT Web service allows plant operators to discover OPC UA enabled servers in a factory network and register them in Azure IoT Hub. Operations personnel can subscribe to and react to events on the factory floor from anywhere in the world. The APIs mirror the OPC UA services and are secured through IoT Hub or optionally using OAUTH authentication and authorization backed by Azure Active Directory (AAD). This enables your applications to browse server address spaces or read/write variables and execute methods using IoT Hub, MQTT or HTTPS with simple JSON payloads.
+
+OPC Publisher is a module that runs on Azure IoT Edge and bridges the gap between industrial assets and the Microsoft Azure cloud. It connects to OPC UA server systems and publishes telemetry data to Azure IoT Hub in various formats.
+
+The Azure Industrial IoT companion web (OPC Publisher Web API) service is an optional component included in this repo and provides cloud side APIs to configure and operate the OPC Publisher module.
+
+OPC Unified Architecture (UA), released in 2008, is a platform-independent, service-oriented interoperability standard. OPC UA is used by various industrial systems and devices such as industry PCs, PLCs, and sensors. OPC UA integrates the functionality of the OPC Classic specifications into one extensible framework with built-in security. It is a standard that is driven by the OPC Foundation.
+
+The architecture of the system is at it follows (diagram taken from [docs](https://github.com/Azure/Industrial-IoT/blob/main/docs/readme.md)):
+
+The following diagram (taken from [docs](https://github.com/Azure/Industrial-IoT/blob/main/docs/readme.md)) shows how the OPC Publisher and optional REST Api integrate with Azure IoT Hub, Azure IoT Edge and other Azure services:
+![Architecture](./architecture.png)
+
+The current state of the IIoT system is represented by the following diagram generated in our Azure account:
 ![Stage 2](./iiot_simulation.svg)
 
 The resource groups involved in the current stage are:
