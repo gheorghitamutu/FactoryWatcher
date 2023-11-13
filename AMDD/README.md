@@ -64,9 +64,8 @@ The Azure Industrial IoT companion web (OPC Publisher Web API) service is an opt
 
 OPC Unified Architecture (UA), released in 2008, is a platform-independent, service-oriented interoperability standard. OPC UA is used by various industrial systems and devices such as industry PCs, PLCs, and sensors. OPC UA integrates the functionality of the OPC Classic specifications into one extensible framework with built-in security. It is a standard that is driven by the OPC Foundation.
 
-The architecture of the system is at it follows (diagram taken from [docs](https://github.com/Azure/Industrial-IoT/blob/main/docs/readme.md)):
-
 The following diagram (taken from [docs](https://github.com/Azure/Industrial-IoT/blob/main/docs/readme.md)) shows how the OPC Publisher and optional REST Api integrate with Azure IoT Hub, Azure IoT Edge and other Azure services:
+
 ![Architecture](./architecture.png)
 
 The current state of the IIoT system is represented by the following diagram generated in our Azure account:
