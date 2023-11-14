@@ -1,4 +1,14 @@
 - [Overview](#overview)
+- [Stage 1](#stage-1)
+  - [Initial Research/Prerequisites](#initial-researchprerequisites)
+  - [Deployment Issues](#deployment-issues)
+- [Stage 2](#stage-2)
+  - [Setup](#setup)
+  - [Architecture](#architecture)
+  - [NetworkWatcherRG](#networkwatcherrg)
+  - [iiot\_simulation](#iiot_simulation)
+  - [Costs involved (3 test/simulation deployments with no actual data/devices connected)](#costs-involved-3-testsimulation-deployments-with-no-actual-datadevices-connected)
+- [Stage 3](#stage-3)
 
 # Overview
 Model-driven development (MDD) is an approach to software development that emphasizes the use of models to design and specify systems before implementing them in code. This approach is gaining popularity in various domains, including the Industrial Internet of Things (IIoT). IIoT refers to the integration of industrial processes with smart sensors and devices connected to the internet, enabling data collection, analysis, and automation in industrial settings.
