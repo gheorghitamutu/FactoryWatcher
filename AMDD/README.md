@@ -133,6 +133,11 @@ Azure Network Watcher provides a suite of tools to monitor, diagnose, view metri
 | Managed Identity                                | [Info](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview) | A common challenge for developers is the management of secrets, credentials, certificates, and keys used to secure communication between services. Managed identities eliminate the need for developers to manage these credentials. While developers can securely store the secrets in Azure Key Vault, services need a way to access Azure Key Vault. Managed identities provide an automatically managed identity in Microsoft Entra ID for applications to use when connecting to resources that support Microsoft Entra authentication. Applications can use managed identities to obtain Microsoft Entra tokens without having to manage any credentials. | 
 | Storage account                                 | [Info](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview) | An Azure storage account contains all of your Azure Storage data objects: blobs, files, queues, and tables. The storage account provides a unique namespace for your Azure Storage data that's accessible from anywhere in the world over HTTP or HTTPS. Data in your storage account is durable and highly available, secure, and massively scalable. |
 
+Applications:\
+iiot-simulation-client\
+iiot-simulation-service\
+iiot-simulation-web
+
 ## Costs involved (3 test/simulation deployments with no actual data/devices connected)
 | ResourceGroup	    | Resource	                                                           | ResourceType	             | Cost	       | Currency |
 | ----------------- | -------------------------------------------------------------------- | --------------------------- | ----------- | -------- |
