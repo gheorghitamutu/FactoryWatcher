@@ -6,9 +6,10 @@
         {
             Id = Guid.NewGuid();
         }
-        public Guid Id { get; protected set; }
-        public string SensorName { get; set; }
 
-        public double Value { get; set; }
+        public Guid Id { get; private set; }
+        public string SensorName { get; private set; }
+
+        public double Value { get; private set; }
     }
 }

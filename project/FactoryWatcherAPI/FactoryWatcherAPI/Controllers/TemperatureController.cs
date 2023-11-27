@@ -6,13 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FactoryWatcherAPI.Controllers
 {
-    [Route("api/v{version:apiVersion}/courses")]
+    [Route("api/v{version:apiVersion}/temperatures")]
     [ApiController]
     [ApiVersion("1.0")]
     public class TemperatureController : ControllerBase
     {
         private readonly IBaseService<Temperature, CreateTemperatureDto> _temperatureService;
-        private readonly string partitionKey = "test";
 
         public TemperatureController(IBaseService<Temperature, CreateTemperatureDto> temperatureService)
         {
@@ -22,12 +21,8 @@ namespace FactoryWatcherAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateItemAsync(CreateTemperatureDto item)
         {
-            var result = await _temperatureService.Add(item, partitionKey);
-            if (result.IsFailure)
-            {
-                return BadRequest();
-            }
-            return Created(result.Entity.Id);
+            var result = await _temperatureService.Add(item);
+            return Ok(result);
         }
 
         [HttpGet]
@@ -40,18 +35,14 @@ namespace FactoryWatcherAPI.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetItemAsync(string id)
         {
-            var item = await _temperatureService.GetById(id, partitionKey);
-            if (item.IsFailure)
-            {
-                return NotFound();
-            }
-            return Ok(item.Entity);
+            var item = await _temperatureService.GetById(id);
+            return Ok(item);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateItemAsync(string id, CreateTemperatureDto item)
         {
-            var result = await _temperatureService.Update(id, item, partitionKey);
+            var result = await _temperatureService.Update(id, item);
             if (result.IsFailure)
             {
                 return NotFound();
@@ -59,11 +50,11 @@ namespace FactoryWatcherAPI.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteItemAsync(string id)
-        {
-            var result = await _temperatureService.Delete(id, partitionKey);
-            return NoContent();
-        }
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteItemAsync(string id)
+        //{
+        //    var result = await _temperatureService.Delete(id);
+        //    return NoContent();
+        //}
     }
 }

@@ -1,13 +1,15 @@
 ﻿using FactoryWatcher.Models.Helpers;
+using Microsoft.Azure.Cosmos;
 
 namespace FactoryWatcher.BusinessLogic
 {
-    public interface IBaseService<T, TDto> where T : class where TDto : class
+    public interface IBaseService<T, TDto>
+        where T : class
+        where TDto : class
     {
-        Task<Result<T>> Add(TDto dto, string partitionKet);
-        Task<Result<T>> Delete(string id, string partitionKey);
+        Task<ItemResponse<T>> Add(TDto dto);
         Task<Result<IEnumerable<T>>> GetAll();
-        Task<Result<T>> GetById(string id, string partitionKey);
-        Task<Result<T>> Update(string id, TDto dto, string partitionKey);
+        Task<ItemResponse<T>> GetById(string id);
+        Task<Result<T>> Update(string id, TDto dto);
     }
 }
