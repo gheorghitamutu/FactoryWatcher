@@ -6,6 +6,7 @@
   - [Connect to the IoT Hub](#connect-to-the-iot-hub)
   - [Handle Protobuf serialization](#handle-protobuf-serialization)
   - [Run the Azure Function locally](#run-the-azure-function-locally)
+  - [Next Steps](#next-steps)
 - [Bibliography](#bibliography)
 
 # Stages
@@ -353,16 +354,28 @@ Success!!!
 We received the messages in IoT Hub:
 ![IoT Hub Metrics (Telemetry messages sent)](iot_hub_messages_received.png)
 
+## Next Steps
+
+Logic App
+
+Use events as a trigger for executing a Logic App, starting Azure-wide workflows and automation.
+
+Azure Function
+
+Use events as a trigger for executing an Azure Function, which enables serverless custom code execution.
+
+We'll be using both to automatize the pipelines and various AOP use cases.
+
 # Bibliography
-https://learn.microsoft.com/ro-ro/azure/iot-hub/quickstart-send-telemetry-cli
-https://stackoverflow.com/questions/36343223/create-c-sharp-sln-file-with-visual-studio-code
-https://learn.microsoft.com/en-us/azure/azure-functions/functions-core-tools-reference?tabs=v2#func-templates-list
-https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-cli-csharp?tabs=macos%2Cazure-cli
-https://github.com/Azure/iotedgedev
-https://learn.microsoft.com/en-us/azure/iot-edge/tutorial-develop-for-linux?view=iotedge-1.4&branch=pr-en-us-203829&tabs=csharp&pivots=iotedge-dev-cli
-https://learn.microsoft.com/en-us/azure/iot-edge/how-to-continuous-integration-continuous-deployment-classic?view=iotedge-1.4&viewFallbackFrom=iotedge-2020-11
-https://learn.microsoft.com/en-us/azure/app-service/deploy-github-actions?tabs=applevel
-https://github.com/Azure/actions
-https://stackoverflow.com/questions/3574716/date-and-time-type-for-use-with-protobuf
-https://learn.microsoft.com/en-us/azure/azure-functions/functions-develop-vs-code?tabs=node-v3%2Cpython-v2%2Cisolated-process&pivots=programming-language-csharp
+https://learn.microsoft.com/ro-ro/azure/iot-hub/quickstart-send-telemetry-cli \
+https://stackoverflow.com/questions/36343223/create-c-sharp-sln-file-with-visual-studio-code \
+https://learn.microsoft.com/en-us/azure/azure-functions/functions-core-tools-reference?tabs=v2#func-templates-list \
+https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-cli-csharp?tabs=macos%2Cazure-cli \
+https://github.com/Azure/iotedgedev \
+https://learn.microsoft.com/en-us/azure/iot-edge/tutorial-develop-for-linux?view=iotedge-1.4&branch=pr-en-us-203829&tabs=csharp&pivots=iotedge-dev-cli \
+https://learn.microsoft.com/en-us/azure/iot-edge/how-to-continuous-integration-continuous-deployment-classic?view=iotedge-1.4&viewFallbackFrom=iotedge-2020-11 \
+https://learn.microsoft.com/en-us/azure/app-service/deploy-github-actions?tabs=applevel \
+https://github.com/Azure/actions \
+https://stackoverflow.com/questions/3574716/date-and-time-type-for-use-with-protobuf \
+https://learn.microsoft.com/en-us/azure/azure-functions/functions-develop-vs-code?tabs=node-v3%2Cpython-v2%2Cisolated-process&pivots=programming-language-csharp \
 https://github.com/Azure/azure-functions-core-tools/issues/2959#issuecomment-1136356003
