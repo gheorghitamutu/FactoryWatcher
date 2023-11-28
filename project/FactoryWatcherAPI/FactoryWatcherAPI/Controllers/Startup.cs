@@ -1,7 +1,7 @@
 ﻿using Castle.DynamicProxy;
+using FactoryWatcher.BusinessLogic;
 using FactoryWatcher.DataAccess;
-using FactoryWatcher.DataAccess.Repositories.Aspects;
-using FactoryWatcher.DataAccess.Repositories.Implementations;
+using FactoryWatcher.Models.Dtos;
 using FactoryWatcher.Models.Models;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Options;
@@ -17,7 +17,7 @@ namespace FactoryWatcherAPI.Controllers
 
         public IConfiguration Configuration { get; }
 
-        publi   c void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CosmosDbSettings>(Configuration.GetSection("CosmosDbSettings"));
 
@@ -36,26 +36,8 @@ namespace FactoryWatcherAPI.Controllers
                 return cosmosClient;
             });
 
-            // Register your repository
-            services.AddSingleton<RepositoryLoggingInterceptor>();
-            services.AddSingleton(provider =>
-            {
-                var generator = ProxyGenerator();
-                var loggingInterceptor = provider.GetRequiredService<RepositoryLoggingInterceptor>();
-
-                generator.RegisterInterceptor<RepositoryLoggingInterceptor>(i => true);
-                return generator;
-            });
-
-            services.AddScoped<ICosmosDbRepository<Temperature>>(provider =>
-            {
-                var generator = provider.GetRequiredService<ProxyGenerator>();
-                var loggingInterceptor = provider.GetRequiredService<RepositoryLoggingInterceptor>();
-                var targetRepository = provider.GetRequiredService<TemperatureCosmosDbRepository>(); // Adjust this based on your actual repository class
-
-                // Create a proxy for ICosmosDbRepository<Temperature> with the logging interceptor
-                return generator.CreateInterfaceProxyWithTarget<ICosmosDbRepository<Temperature>>(targetRepository, loggingInterceptor);
-            });
+            services.AddScoped<ICosmosDbRepository<Temperature>, CosmosDbRepository<Temperature>>();
+            services.AddScoped<IBaseService<Temperature, CreateTemperatureDto>, BaseService<Temperature, CreateTemperatureDto>>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
