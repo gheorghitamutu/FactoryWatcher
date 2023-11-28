@@ -2,7 +2,9 @@
   - [Install tools](#install-tools)
   - [Create Solution \& Project](#create-solution--project)
   - [Get the actual template for the function](#get-the-actual-template-for-the-function)
-  - [Looking into CI/CD](#looking-into-cicd)
+  - [Build a viable CI/CD integration](#build-a-viable-cicd-integration)
+  - [Connect to the IoT Hub](#connect-to-the-iot-hub)
+  - [Handle Protobuf serialization](#handle-protobuf-serialization)
 - [Bibliography](#bibliography)
 
 # Stages
@@ -219,7 +221,7 @@ Run the function locally:
 func start
 ```
 
-## Looking into CI/CD
+## Build a viable CI/CD integration
 
 Via https://learn.microsoft.com/en-us/azure/iot-edge/how-to-continuous-integration-continuous-deployment-classic?view=iotedge-1.4&viewFallbackFrom=iotedge-2020-11 we looked at:
 ![Deployment Pipeline](model.png)
@@ -271,7 +273,40 @@ jobs:
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_<CENSORED> }}
 ```
 
+## Connect to the IoT Hub
+The connection to the IoT Hub is made via a connection string create in the resource `Shared access policies` area.
+The string is usually passed via ENV VARS but for simplicity we'll hardcode it in our code.
+
+## Handle Protobuf serialization
+
+Install protoc
+```
+brew install protobuf
+```
+
+Use a simple proto model for the sensor:
+```
+syntax = "proto3";
+
+enum EquipmentStatus {
+  OK = 0;
+  WARNING = 1;
+  ERROR = 2;
+}
+
+message Equipment {
+  int64 id = 1;
+  int32 equipment_id = 2;
+  EquipmentStatus status = 3;
+  string message = 4;
+  // Additional equipment status fields can be added here
+}
+```
+
+
 # Bibliography
+https://learn.microsoft.com/ro-ro/azure/iot-hub/quickstart-send-telemetry-cli
+https://stackoverflow.com/questions/36343223/create-c-sharp-sln-file-with-visual-studio-code
 https://learn.microsoft.com/en-us/azure/azure-functions/functions-core-tools-reference?tabs=v2#func-templates-list
 https://learn.microsoft.com/en-us/azure/azure-functions/create-first-function-cli-csharp?tabs=macos%2Cazure-cli
 https://github.com/Azure/iotedgedev
