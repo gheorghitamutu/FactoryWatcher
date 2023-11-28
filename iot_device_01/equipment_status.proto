@@ -1,5 +1,9 @@
 syntax = "proto3";
 
+import "google/protobuf/timestamp.proto";
+
+package equipment;
+
 enum EquipmentStatus {
   OK = 0;
   WARNING = 1;
@@ -11,5 +15,6 @@ message Equipment {
   int32 equipment_id = 2;
   EquipmentStatus status = 3;
   string message = 4;
+  google.protobuf.Timestamp timestamp = 5;
   // Additional equipment status fields can be added here
 }

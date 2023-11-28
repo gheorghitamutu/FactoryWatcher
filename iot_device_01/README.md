@@ -303,6 +303,10 @@ message Equipment {
 }
 ```
 
+Create C# class from protoc file:
+```
+protoc --csharp_out=. equipment_status.proto
+```
 
 # Bibliography
 https://learn.microsoft.com/ro-ro/azure/iot-hub/quickstart-send-telemetry-cli
@@ -314,3 +318,5 @@ https://learn.microsoft.com/en-us/azure/iot-edge/tutorial-develop-for-linux?view
 https://learn.microsoft.com/en-us/azure/iot-edge/how-to-continuous-integration-continuous-deployment-classic?view=iotedge-1.4&viewFallbackFrom=iotedge-2020-11
 https://learn.microsoft.com/en-us/azure/app-service/deploy-github-actions?tabs=applevel
 https://github.com/Azure/actions
+https://stackoverflow.com/questions/3574716/date-and-time-type-for-use-with-protobuf
+https://learn.microsoft.com/en-us/azure/azure-functions/functions-develop-vs-code?tabs=node-v3%2Cpython-v2%2Cisolated-process&pivots=programming-language-csharp
