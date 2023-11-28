@@ -5,6 +5,7 @@
   - [Build a viable CI/CD integration](#build-a-viable-cicd-integration)
   - [Connect to the IoT Hub](#connect-to-the-iot-hub)
   - [Handle Protobuf serialization](#handle-protobuf-serialization)
+  - [Run the Azure Function locally](#run-the-azure-function-locally)
 - [Bibliography](#bibliography)
 
 # Stages
@@ -308,6 +309,50 @@ Create C# class from protoc file:
 protoc --csharp_out=. equipment_status.proto
 ```
 
+## Run the Azure Function locally
+
+Trying to run the Azure Function locally will require the solution presented in https://github.com/Azure/azure-functions-core-tools/issues/2959#issuecomment-1136356003. We need a local storage emulator (Azurite).
+
+We need to create a new device in IoT Hub in order to specify it into the connection string!
+
+Create a device
+
+Device iiot-device-01 successfully created.
+
+Success!!!
+```
+[2023-11-28T19:02:58.099Z] The next 5 occurrences of the 'GenerateDeviceResponse' schedule (Cron: '0 0,5,10,15,20,25,30,35,40,45,50,55 * * * *') will be:
+[2023-11-28T19:02:58.099Z] 11/28/2023 21:05:00+02:00 (11/28/2023 19:05:00Z)
+[2023-11-28T19:02:58.099Z] 11/28/2023 21:10:00+02:00 (11/28/2023 19:10:00Z)
+[2023-11-28T19:02:58.099Z] 11/28/2023 21:15:00+02:00 (11/28/2023 19:15:00Z)
+[2023-11-28T19:02:58.099Z] 11/28/2023 21:20:00+02:00 (11/28/2023 19:20:00Z)
+[2023-11-28T19:02:58.099Z] 11/28/2023 21:25:00+02:00 (11/28/2023 19:25:00Z)
+[2023-11-28T19:02:58.099Z] 
+[2023-11-28T19:02:58.103Z] Host started (188ms)
+[2023-11-28T19:02:58.103Z] Job host started
+[2023-11-28T19:02:58.149Z] {
+[2023-11-28T19:02:58.150Z]   "ProcessId": 52090,
+[2023-11-28T19:02:58.150Z]   "RuntimeIdentifier": "osx-arm64",
+[2023-11-28T19:02:58.150Z]   "WorkerVersion": "1.15.0.0",
+[2023-11-28T19:02:58.150Z]   "ProductVersion": "1.15.0\u002Be358ca5b804dc282e1c98b48ab6097caca0fc0fb",
+[2023-11-28T19:02:58.150Z]   "FrameworkDescription": ".NET 8.0.0",
+[2023-11-28T19:02:58.150Z]   "OSDescription": "Darwin 23.0.0 Darwin Kernel Version 23.0.0: Fri Sep 15 14:43:05 PDT 2023; root:xnu-10002.1.13~1/RELEASE_ARM64_T6020",
+[2023-11-28T19:02:58.150Z]   "OSArchitecture": "Arm64",
+[2023-11-28T19:02:58.150Z]   "CommandLine": "/Users/gheorghitamutu/Repositories/FactoryWatcher/iot_device_01/bin/output/iot_device_01.dll --host 127.0.0.1 --port 61476 --workerId 6d31dab1-1a17-47aa-9603-485e1fc8bdc1 --requestId 4340aba2-d0be-42d7-90af-f5e64617c90d --grpcMaxMessageLength 2147483647 --functions-uri http://127.0.0.1:61476/ --functions-worker-id 6d31dab1-1a17-47aa-9603-485e1fc8bdc1 --functions-request-id 4340aba2-d0be-42d7-90af-f5e64617c90d --functions-grpc-max-message-length 2147483647"
+[2023-11-28T19:02:58.150Z] }
+[2023-11-28T19:02:58.223Z] Worker process started and initialized.
+[2023-11-28T19:03:02.928Z] Host lock lease acquired by instance ID '000000000000000000000000320A7259'.
+[2023-11-28T19:05:00.126Z] C# Timer trigger function executed at: 11/28/2023 9:05:00 PM
+[2023-11-28T19:06:01.641Z] 11/28/2023 9:06:01 PM > Sending message: { "id": "1", "equipmentId": 1, "message": "Test message", "timestamp": "2023-11-28T19:05:00.156805Z" }
+[2023-11-28T19:06:02.693Z] Executed 'Functions.GenerateDeviceResponse' (Succeeded, Id=0f09dfab-bc3a-4430-bce7-bac56bebff4f, Duration=62661ms)
+[2023-11-28T19:09:59.998Z] Executing 'Functions.GenerateDeviceResponse' (Reason='Timer fired at 2023-11-28T21:09:59.9967860+02:00', Id=6a3ddffd-b854-4ce2-8b8e-791a91f61bce)
+[2023-11-28T19:10:00.008Z] C# Timer trigger function executed at: 11/28/2023 9:10:00 PM
+[2023-11-28T19:11:01.361Z] 11/28/2023 9:11:01 PM > Sending message: { "id": "1", "equipmentId": 1, "message": "Test message", "timestamp": "2023-11-28T19:10:00.008549Z" }
+```
+
+We received the messages in IoT Hub:
+![IoT Hub Metrics (Telemetry messages sent)](iot_hub_messages_received.png)
+
 # Bibliography
 https://learn.microsoft.com/ro-ro/azure/iot-hub/quickstart-send-telemetry-cli
 https://stackoverflow.com/questions/36343223/create-c-sharp-sln-file-with-visual-studio-code
@@ -320,3 +365,4 @@ https://learn.microsoft.com/en-us/azure/app-service/deploy-github-actions?tabs=a
 https://github.com/Azure/actions
 https://stackoverflow.com/questions/3574716/date-and-time-type-for-use-with-protobuf
 https://learn.microsoft.com/en-us/azure/azure-functions/functions-develop-vs-code?tabs=node-v3%2Cpython-v2%2Cisolated-process&pivots=programming-language-csharp
+https://github.com/Azure/azure-functions-core-tools/issues/2959#issuecomment-1136356003

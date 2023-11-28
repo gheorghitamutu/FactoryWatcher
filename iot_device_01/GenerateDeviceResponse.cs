@@ -47,22 +47,22 @@ namespace iot_device_01
         [Function("GenerateDeviceResponse")]
         public static async Task Run([TimerTrigger("0 */5 * * * *")] TimerInfo myTimer, ILogger log)
         {
-            log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
+            log?.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
             Console.WriteLine($"C# Timer trigger function executed at: {DateTime.Now}");
 
             // do not use connection string in production!!!
             DeviceClient iotDevice =
                 DeviceClient.CreateFromConnectionString(
-                    "HostName=iiot-main-hub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=oRetTItYwDyD8kGsb4Zn8MO+8ZA0+uE0XAIoTC3z3bA=");
+                    "HostName=iiot-main-hub.azure-devices.net;DeviceId=iiot-device-01;SharedAccessKey=n2jW3JnIHEjXZqOj7q4vq80H8OYOWijFBAIoTFwaIbI=");
             
             var status = GetEquipmentResponse();
 
             await SendDeviceToCloudMessagesAsync(iotDevice, status);
-            log.LogInformation($"Data sent to IoT Event Hub: {status} at: {DateTime.Now}");
+            log?.LogInformation($"Data sent to IoT Event Hub: {status} at: {DateTime.Now}");
 
             if (myTimer.ScheduleStatus is not null)
             {
-                log.LogInformation($"Next timer schedule at: {myTimer.ScheduleStatus.Next}");
+                log?.LogInformation($"Next timer schedule at: {myTimer.ScheduleStatus.Next}");
             }
         }
     }
