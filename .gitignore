@@ -400,3 +400,5 @@ FodyWeavers.xsd
 # Rust
 **/target/**
 Cargo.lock
+AMDD/.DS_Store
+.DS_Store
