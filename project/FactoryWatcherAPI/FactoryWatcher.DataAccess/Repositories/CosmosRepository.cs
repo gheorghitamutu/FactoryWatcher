@@ -9,17 +9,14 @@ public class CosmosDbRepository<T> : ICosmosDbRepository<T> where T : BaseEntity
 
     private readonly CosmosClient _cosmosClient;
 
-    private readonly String _partitionKey = "partitionKey";
 
-    private readonly String _collectionName = "myCollection";
-
-    public CosmosDbRepository(CosmosClient cosmosClient, IOptions<CosmosDbSettings> cosmosDbSettings)
+    public CosmosDbRepository(CosmosClient cosmosClient, IOptions<CosmosDbSettings> cosmosDbSettings, String containerId)
     {
         _cosmosClient = cosmosClient;
 
         // Get or create the container based on configuration
         var database = _cosmosClient.GetDatabase(cosmosDbSettings.Value.DatabaseId);
-        _container = database.GetContainer(cosmosDbSettings.Value.ContainerId);
+        _container = database.GetContainer(containerId);
     }
 
     public async Task<ItemResponse<T>> GetByIdAndPartitionKey(string id)

@@ -86,13 +86,13 @@ namespace FactoryWatcherAPI.Controllers
                 return cosmosClient;
             });
 
-            services.AddScoped<ICosmosDbRepository<Temperature>, CosmosDbRepository<Temperature>>();
+            services.AddScoped<ICosmosDbRepository<Temperature>, TemperatureCosmosDbRepository>();
             services.AddScoped<IBaseService<Temperature, CreateTemperatureDto>, BaseService<Temperature, CreateTemperatureDto>>();
 
-            services.AddScoped<ICosmosDbRepository<Humidity>, CosmosDbRepository<Humidity>>();
+            services.AddScoped<ICosmosDbRepository<Humidity>, HumidityCosmosDbRepository>();
             services.AddScoped<IBaseService<Humidity, CreateHumidityDto>, BaseService<Humidity, CreateHumidityDto>>();
 
-            services.AddScoped<ICosmosDbRepository<Pressure>, CosmosDbRepository<Pressure>>();
+            services.AddScoped<ICosmosDbRepository<Pressure>, PressureCosmosDbRepository>();
             services.AddScoped<IBaseService<Pressure, CreatePressureDto>, BaseService<Pressure, CreatePressureDto>>();
             return services;
         }
