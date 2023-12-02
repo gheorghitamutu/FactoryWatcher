@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
 using FactoryWatcher.Models.Helpers;
+using FactoryWatcher.Models.Models;
 using LabsAndCoursesManagement.BusinessLogic.Mappers;
 using Microsoft.Azure.Cosmos;
 using System.Net;
 
 namespace FactoryWatcher.BusinessLogic
 {
-    public class BaseService<T, TDto> : IBaseService<T, TDto> where T : class where TDto : class
+    public class BaseService<T, TDto> : IBaseService<T, TDto> where T : BaseEntity where TDto : class
     {
         protected readonly IMapper mapper;
         protected readonly ICosmosDbRepository<T> repository;

@@ -1,8 +1,9 @@
 ﻿using FactoryWatcher.DataAccess;
+using FactoryWatcher.Models.Models;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Options;
 
-public class CosmosDbRepository<T> : ICosmosDbRepository<T> where T : class
+public class CosmosDbRepository<T> : ICosmosDbRepository<T> where T : BaseEntity
 {
     private readonly Container _container;
 
@@ -23,17 +24,17 @@ public class CosmosDbRepository<T> : ICosmosDbRepository<T> where T : class
 
     public async Task<ItemResponse<T>> GetByIdAndPartitionKey(string id)
     {
-        return await _container.ReadItemAsync<T>(id, new PartitionKey(_partitionKey));
+        return await _container.ReadItemAsync<T>(id, new PartitionKey(id));
     }
 
     public async Task<ItemResponse<T>> Add(T item)
     {
-        return await _container.CreateItemAsync(item, new PartitionKey(_partitionKey));
+        return await _container.CreateItemAsync(item, new PartitionKey(item.Id.ToString()));
     }
 
     public async Task<ItemResponse<T>> Update(string id, T item)
     {
-        return await _container.ReplaceItemAsync(item, id, new PartitionKey(_partitionKey));
+        return await _container.ReplaceItemAsync(item, id, new PartitionKey(item.Id.ToString()));
     }
 
 

@@ -1,9 +1,10 @@
+using FactoryWatcherAPI.Controllers;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -26,6 +27,13 @@ builder.Services.AddVersionedApiExplorer(
         options.GroupNameFormat = "'v'VVV";
         options.SubstituteApiVersionInUrl = true;
     });
+
+var configuration = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+            .AddEnvironmentVariables()
+            .Build();
+
+builder.Services.AddApplicationServices(configuration);
 
 var app = builder.Build();
 
