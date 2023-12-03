@@ -53,7 +53,7 @@ namespace iot_device_01
             // do not use connection string in production!!!
             DeviceClient iotDevice =
                 DeviceClient.CreateFromConnectionString(
-                    "HostName=iiot-main-hub.azure-devices.net;DeviceId=iiot-device-01;SharedAccessKey=n2jW3JnIHEjXZqOj7q4vq80H8OYOWijFBAIoTFwaIbI=");
+                    "HostName=iiot-hub.azure-devices.net;DeviceId=iot_device_01;SharedAccessKey=k/BC/WyieQasZmPt+P9fjE10h8yhr9LZYAIoTJDyxzE=");
             
             var status = GetEquipmentResponse();
 
