@@ -42,7 +42,7 @@ namespace iot_device_01
             };
         }
 
-        private static async Task SendDeviceToCloudMessagesAsync(DeviceClient iotDevice, Equipment.Equipment equipment)
+        private static async Task SendEquipment(DeviceClient iotDevice, Equipment.Equipment equipment)
         {
             // Create JSON message
             var message = new Message(Encoding.UTF8.GetBytes(equipment.ToString()))
@@ -61,6 +61,25 @@ namespace iot_device_01
             await Task.Delay(TimeSpan.FromSeconds(1)).ConfigureAwait(false);
         }
 
+        private static async Task SendSensor(DeviceClient iotDevice, Sensor.SensorData data)
+        {
+            // Create JSON message
+            var message = new Message(Encoding.UTF8.GetBytes(data.ToString()))
+            {
+                // Add a custom application property to the message.
+                // An IoT hub can filter on these properties without access to the message body.
+                // message.Properties.Add("temperatureAlert", (currentTemperature > 30) ? "true" : "false");
+                ContentType = "application/json",
+                ContentEncoding = "utf-8"
+            };
+
+            // Send the telemetry message
+            await iotDevice.SendEventAsync(message).ConfigureAwait(false);
+            Console.WriteLine("{0} > Sending message: {1}", DateTime.Now, data.ToString());
+
+            await Task.Delay(TimeSpan.FromSeconds(1)).ConfigureAwait(false);
+        }
+
         [Function("GenerateDeviceResponse")]
         public static async Task Run([TimerTrigger("0 */5 * * * *")] TimerInfo myTimer, ILogger log)
         {
@@ -72,10 +91,10 @@ namespace iot_device_01
                 DeviceClient.CreateFromConnectionString(
                     "HostName=iiot-hub.azure-devices.net;DeviceId=iot_device_01;SharedAccessKey=k/BC/WyieQasZmPt+P9fjE10h8yhr9LZYAIoTJDyxzE=");
             
-            var equipmentStatus = GenerateEquipmentResponse();
+            var response = GetSensorResponse();
 
-            await SendDeviceToCloudMessagesAsync(iotDevice, equipmentStatus);
-            log?.LogInformation($"Data sent to IoT Event Hub: {equipmentStatus} at: {DateTime.Now}");
+            await SendSensor(iotDevice, response);
+            log?.LogInformation($"Data sent to IoT Event Hub: {response} at: {DateTime.Now}");
 
             if (myTimer.ScheduleStatus is not null)
             {
