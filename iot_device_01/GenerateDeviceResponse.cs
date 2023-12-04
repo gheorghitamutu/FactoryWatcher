@@ -4,6 +4,7 @@ using Microsoft.Azure.Devices.Client;
 using Microsoft.Extensions.Logging;
 using Google.Protobuf;
 using Equipment;
+using Sensor;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
@@ -13,7 +14,7 @@ namespace iot_device_01
 {
     public class GenerateDeviceResponse
     {
-        public static Equipment.Equipment GetEquipmentResponse()
+        public static Equipment.Equipment GenerateEquipmentResponse()
         {
             return new Equipment.Equipment
             {
@@ -22,6 +23,22 @@ namespace iot_device_01
                 Status = Equipment.EquipmentStatus.Ok,
                 Message = "Test message",
                 Timestamp = Timestamp.FromDateTime(DateTime.UtcNow),
+
+            };
+        }
+
+        public static Sensor.SensorData GetSensorResponse()
+        {
+            return new Sensor.SensorData
+            {
+                Uuid = "22309216-3531-4f53-b8e5-e2453aa44cea", // Guid.NewGuid().ToString(),
+                SensorId = 1,
+                Timestamp = Timestamp.FromDateTime(DateTime.UtcNow),
+                ExtraInfo = "Test message",
+                Status = Sensor.Status.Ok,
+                Humidity = 0.2f,
+                Temperature = 0.5f,
+                Pressure = 0.3f,
             };
         }
 
@@ -55,10 +72,10 @@ namespace iot_device_01
                 DeviceClient.CreateFromConnectionString(
                     "HostName=iiot-hub.azure-devices.net;DeviceId=iot_device_01;SharedAccessKey=k/BC/WyieQasZmPt+P9fjE10h8yhr9LZYAIoTJDyxzE=");
             
-            var status = GetEquipmentResponse();
+            var equipmentStatus = GenerateEquipmentResponse();
 
-            await SendDeviceToCloudMessagesAsync(iotDevice, status);
-            log?.LogInformation($"Data sent to IoT Event Hub: {status} at: {DateTime.Now}");
+            await SendDeviceToCloudMessagesAsync(iotDevice, equipmentStatus);
+            log?.LogInformation($"Data sent to IoT Event Hub: {equipmentStatus} at: {DateTime.Now}");
 
             if (myTimer.ScheduleStatus is not null)
             {

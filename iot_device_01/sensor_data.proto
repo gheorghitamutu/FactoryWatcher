@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package Sensor;
+
+enum Status {
+  OK = 0;
+  WARNING = 1;
+  ERROR = 2;
+}
+
+message SensorData {
+  string uuid = 1;
+  int32 sensor_id = 2;
+  google.protobuf.Timestamp timestamp = 3;
+  string extra_info = 4;
+  Status status = 5;
+  double humidity = 6;
+  double pressure = 7;
+  double temperature = 8;
+  // Additional equipment status fields can be added here
+}
