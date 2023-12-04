@@ -1,0 +1,18 @@
+<mat-drawer-container class="sidenav-container">
+  <mat-drawer mode="side" opened>
+    <mat-list role="list">
+      <mat-list-item role="listitem">
+        <button mat-raised-button class="custom-button" color="primary" (click)="assignComponent('persons')">Temperatures</button>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <button mat-raised-button class="custom-button" color="primary" (click)="assignComponent('flights')">Reports</button>
+      </mat-list-item>
+    </mat-list>
+  </mat-drawer>
+  <mat-drawer-content style="background: white">
+    <div>
+      <ng-container *ngComponentOutlet="dummyComponent"></ng-container>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+

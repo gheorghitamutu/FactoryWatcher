@@ -2,7 +2,7 @@
 
 namespace FactoryWatcher.Models.Dtos
 {
-    public class CreateTemperatureDto: DtoBaseEntity
+    public class CreateHumidityDto: DtoBaseEntity
     {
         public double Value { get; set; }
     }

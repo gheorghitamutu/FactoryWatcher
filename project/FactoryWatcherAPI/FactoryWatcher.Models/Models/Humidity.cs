@@ -2,9 +2,9 @@
 
 namespace FactoryWatcher.Models.Models
 {
-    public class Temperature: BaseEntity
+    public class Humidity: BaseEntity
     {
-        public Temperature()
+        public Humidity()
         {
             Id = Guid.NewGuid();
         }

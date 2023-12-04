@@ -1,10 +1,11 @@
 ﻿using FactoryWatcher.Models.Helpers;
+using FactoryWatcher.Models.Models;
 using Microsoft.Azure.Cosmos;
 
 namespace FactoryWatcher.BusinessLogic
 {
     public interface IBaseService<T, TDto>
-        where T : class
+        where T : BaseEntity
         where TDto : class
     {
         Task<ItemResponse<T>> Add(TDto dto);
