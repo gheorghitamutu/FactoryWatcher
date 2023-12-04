@@ -366,6 +366,8 @@ Use events as a trigger for executing an Azure Function, which enables serverles
 
 We'll be using both to automatize the pipelines and various AOP use cases.
 
+Careful on mismatches.. https://github.com/Azure/azure-functions-core-tools/issues/2955#issuecomment-1481870535.
+
 # Bibliography
 https://learn.microsoft.com/ro-ro/azure/iot-hub/quickstart-send-telemetry-cli \
 https://stackoverflow.com/questions/36343223/create-c-sharp-sln-file-with-visual-studio-code \

@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "sensor_data_processor": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7051",
+      "launchBrowser": false
+    }
+  }
+}
