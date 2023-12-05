@@ -1,6 +1,7 @@
-﻿using Microsoft.Azure.Cosmos;
+﻿using FactoryWatcher.Models.Models;
+using Microsoft.Azure.Cosmos;
 
-public interface ICosmosDbRepository<T> where T : class
+public interface ICosmosDbRepository<T> where T : BaseEntity
 {
     Task<ItemResponse<T>> Add(T item);
     Task<IEnumerable<T>> GetAll();

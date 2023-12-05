@@ -1,39 +1,37 @@
 ﻿using FactoryWatcher.DataAccess;
+using FactoryWatcher.Models.Models;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Options;
 
-public class CosmosDbRepository<T> : ICosmosDbRepository<T> where T : class
+public class CosmosDbRepository<T> : ICosmosDbRepository<T> where T : BaseEntity
 {
     private readonly Container _container;
 
     private readonly CosmosClient _cosmosClient;
 
-    private readonly String _partitionKey = "partitionKey";
 
-    private readonly String _collectionName = "myCollection";
-
-    public CosmosDbRepository(CosmosClient cosmosClient, IOptions<CosmosDbSettings> cosmosDbSettings)
+    public CosmosDbRepository(CosmosClient cosmosClient, IOptions<CosmosDbSettings> cosmosDbSettings, String containerId)
     {
         _cosmosClient = cosmosClient;
 
         // Get or create the container based on configuration
         var database = _cosmosClient.GetDatabase(cosmosDbSettings.Value.DatabaseId);
-        _container = database.GetContainer(cosmosDbSettings.Value.ContainerId);
+        _container = database.GetContainer(containerId);
     }
 
     public async Task<ItemResponse<T>> GetByIdAndPartitionKey(string id)
     {
-        return await _container.ReadItemAsync<T>(id, new PartitionKey(_partitionKey));
+        return await _container.ReadItemAsync<T>(id, new PartitionKey(id));
     }
 
     public async Task<ItemResponse<T>> Add(T item)
     {
-        return await _container.CreateItemAsync(item, new PartitionKey(_partitionKey));
+        return await _container.CreateItemAsync(item, new PartitionKey(item.Id.ToString()));
     }
 
     public async Task<ItemResponse<T>> Update(string id, T item)
     {
-        return await _container.ReplaceItemAsync(item, id, new PartitionKey(_partitionKey));
+        return await _container.ReplaceItemAsync(item, id, new PartitionKey(item.Id.ToString()));
     }
 
 
