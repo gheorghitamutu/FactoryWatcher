@@ -15,7 +15,7 @@ namespace FactoryWatcherAPI.Controllers
 
         public HumidityController(IBaseService<Humidity, CreateHumidityDto> HumidityService)
         {
-            var logger = LoggerFactory.Create(builder => builder.AddConsole()).CreateLogger<BaseService<Humidity, CreateHumidityDto>>();
+            //var logger = LoggerFactory.Create(builder => builder.AddConsole()).CreateLogger<BaseService<Humidity, CreateHumidityDto>>();
             _humidityService = HumidityService;
             //var HumidityServiceWithLogging = BaseServiceDispatch<Humidity>.Create(_humidityService, logger);
         }

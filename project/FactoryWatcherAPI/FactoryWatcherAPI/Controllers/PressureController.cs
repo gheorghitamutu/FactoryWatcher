@@ -15,7 +15,7 @@ namespace FactoryWatcherAPI.Controllers
 
         public PressureController(IBaseService<Pressure, CreatePressureDto> PressureService)
         {
-            var logger = LoggerFactory.Create(builder => builder.AddConsole()).CreateLogger<BaseService<Pressure, CreatePressureDto>>();
+            //var logger = LoggerFactory.Create(builder => builder.AddConsole()).CreateLogger<BaseService<Pressure, CreatePressureDto>>();
             _pressureService = PressureService;
             //var PressureServiceWithLogging = BaseServiceDispatch<Pressure>.Create(_pressureService, logger);
         }

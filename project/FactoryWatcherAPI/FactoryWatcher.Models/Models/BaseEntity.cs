@@ -21,6 +21,11 @@ namespace FactoryWatcher.Models.Models
 
         [JsonProperty("status")]
         public Status Status { get; protected set; }
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
+        }
     }
 }
 

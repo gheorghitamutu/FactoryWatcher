@@ -26,6 +26,7 @@ import { SidenavComponent } from './app-sidenav/sidenav.component';
 import { MainContentComponent } from './main-content/main-content.component';
 import {MatListModule} from "@angular/material/list";
 import { FlightsContentComponent } from './flights-content/flights-content.component';
+import { CustomChartComponent } from './custom-chart/custom-chart.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { FlightsContentComponent } from './flights-content/flights-content.compo
     DialogComponent,
     SidenavComponent,
     MainContentComponent,
-    FlightsContentComponent
+    FlightsContentComponent,
+    CustomChartComponent
   ],
   imports: [
     BrowserModule,
