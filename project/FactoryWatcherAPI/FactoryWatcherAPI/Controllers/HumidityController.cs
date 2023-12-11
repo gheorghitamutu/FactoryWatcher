@@ -12,39 +12,40 @@ namespace FactoryWatcherAPI.Controllers
     public class HumidityController : ControllerBase
     {
         private readonly IBaseService<Humidity, CreateHumidityDto> _humidityService;
+        private readonly IBaseService<Humidity, CreateHumidityDto> HumidityServiceWithLogging;
 
         public HumidityController(IBaseService<Humidity, CreateHumidityDto> HumidityService)
         {
-            var logger = LoggerFactory.Create(builder => builder.AddConsole()).CreateLogger<BaseService<Humidity, CreateHumidityDto>>();
+            var logger = LoggerFactory.Create(builder => builder.AddConsole()).CreateLogger<BaseServiceDispatch<IBaseService<Humidity, CreateHumidityDto>>>();
             _humidityService = HumidityService;
-            //var HumidityServiceWithLogging = BaseServiceDispatch<Humidity>.Create(_humidityService, logger);
+            HumidityServiceWithLogging = BaseServiceDispatch<IBaseService<Humidity, CreateHumidityDto>>.Create(_humidityService, logger);
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateItemAsync(CreateHumidityDto item)
         {
-            var result = await _humidityService.Add(item);
+            var result = await HumidityServiceWithLogging.Add(item);
             return Ok(result);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetItemsAsync()
         {
-            Result<IEnumerable<Humidity>> result = await _humidityService.GetAll();
+            Result<IEnumerable<Humidity>> result = await HumidityServiceWithLogging.GetAll();
             return Ok(result.Entity);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetItemAsync(string id)
         {
-            var item = await _humidityService.GetById(id);
+            var item = await HumidityServiceWithLogging.GetById(id);
             return Ok(item);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateItemAsync(string id, CreateHumidityDto item)
         {
-            var result = await _humidityService.Update(id, item);
+            var result = await HumidityServiceWithLogging.Update(id, item);
             if (result.IsFailure)
             {
                 return NotFound();
