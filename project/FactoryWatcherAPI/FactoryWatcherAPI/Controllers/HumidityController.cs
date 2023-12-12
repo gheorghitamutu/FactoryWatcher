@@ -2,10 +2,12 @@
 using FactoryWatcher.Models.Dtos;
 using FactoryWatcher.Models.Helpers;
 using FactoryWatcher.Models.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FactoryWatcherAPI.Controllers
 {
+    [Authorize]
     [Route("api/v{version:apiVersion}/humidities")]
     [ApiController]
     [ApiVersion("1.0")]
