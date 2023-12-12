@@ -11,5 +11,10 @@ namespace FactoryWatcher.Models.Models
 
         [JsonProperty("value")]
         public double Value { get; private set; }
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this, Formatting.Indented);
+        }
     }
 }
