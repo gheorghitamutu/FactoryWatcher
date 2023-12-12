@@ -7,7 +7,6 @@ using System.Net;
 
 namespace FactoryWatcher.BusinessLogic
 {
-
     public class BaseService<T, TDto> : IBaseService<T, TDto> where T : BaseEntity where TDto : class
     {
         protected readonly IMapper mapper;

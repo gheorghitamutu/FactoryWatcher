@@ -19,12 +19,8 @@ namespace FactoryWatcherAPI.Controllers
         public TemperatureController(IBaseService<Temperature, CreateTemperatureDto> temperatureService)
         {
             var logger = LoggerFactory.Create(builder => builder.AddConsole()).CreateLogger<BaseServiceDispatch<IBaseService<Temperature, CreateTemperatureDto>>>();
-<<<<<<< HEAD
             _temperatureService = temperatureService;
             temperatureServiceWithLogging = BaseServiceDispatch<IBaseService<Temperature, CreateTemperatureDto>>.Create(_temperatureService, logger);
-=======
-            _temperatureService = BaseServiceDispatch<IBaseService<Temperature, CreateTemperatureDto>>.Create(temperatureService, logger);
->>>>>>> 90d3a963e69c62d42c80383f148eed0e7845f59c
         }
 
         [HttpPost]

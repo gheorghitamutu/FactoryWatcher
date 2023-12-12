@@ -42,12 +42,7 @@ namespace FactoryWatcher.BusinessLogic
                 _logger.LogInformation(logMessage);
 
                 // Invoke the target method
-                object? result = targetMethod?.Invoke(Target, args);
-
-                // Log information after the invocation
-                string resultMessage = $"Logging: Method {targetMethod?.Name} invoked successfully. Result = {result}";
-                _logger.LogInformation(resultMessage);
-                return result;
+                return targetMethod?.Invoke(Target, args);
             }
             catch (Exception ex)
             {
