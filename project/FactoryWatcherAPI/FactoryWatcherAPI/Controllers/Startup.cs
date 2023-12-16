@@ -1,6 +1,7 @@
 ﻿using Castle.DynamicProxy;
 using FactoryWatcher.BusinessLogic;
 using FactoryWatcher.DataAccess;
+using FactoryWatcher.DataAccess.Repositories;
 using FactoryWatcher.DataAccess.Repositories.Aspects;
 using FactoryWatcher.DataAccess.Repositories.Implementations;
 using FactoryWatcher.Models.Dtos;
@@ -94,6 +95,8 @@ namespace FactoryWatcherAPI.Controllers
 
             services.AddScoped<ICosmosDbRepository<Pressure>, PressureCosmosDbRepository>();
             services.AddScoped<IBaseService<Pressure, CreatePressureDto>, BaseService<Pressure, CreatePressureDto>>();
+
+            services.AddScoped<IUserCosmosRepository, UserCosmosRepository>();
             return services;
         }
     }

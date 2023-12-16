@@ -6,11 +6,17 @@ import {MatDialog} from "@angular/material/dialog";
 import {ApiService} from "../services/api.service";
 import {DialogComponent} from "../dialog/dialog.component";
 
+import { Chart, registerables} from 'chart.js';
+
+Chart.register(...registerables);
+
 @Component({
   selector: 'app-main-content',
   templateUrl: './main-content.component.html',
   styleUrls: ['./main-content.component.css']
 })
+
+
 export class MainContentComponent implements OnInit{
   title = 'clients_manager_front';
   displayedColumns: string[] = ['id', 'sensorId', 'value', 'timestamp', 'extraInfo'];
@@ -72,11 +78,52 @@ export class MainContentComponent implements OnInit{
     this.api.getPersons()
       .subscribe({
         next: (res) => {
-          console.log(res);
+          // console.log(res);
           // this.updateDates(res);
           this.dataSource = new MatTableDataSource<any>(res);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
+          
+          const values: number[] = [];
+
+          const intervalsCount = new Map<number, number>();
+
+          for (const measure of res) {
+            console.log(measure);
+            let value = Math.round(measure["value"] / 10) * 10
+            if (intervalsCount.has(value)) {
+              // Number is already in the map, increase the count
+              const currentCount = intervalsCount.get(value) || 0;
+              intervalsCount.set(value, currentCount + 1);
+            } else {
+              // Number is not in the map, create a new entry with count 1
+              intervalsCount.set(value, 1);
+            }
+          }
+          const sortedEntries = [...intervalsCount.entries()].sort((a, b) => a[0] - b[0]);
+
+          console.log(sortedEntries);
+
+          // console.log(intervalsCount);
+          // console.log(intervalsCount.keys());
+          new Chart("myChart", {
+            type: 'bar',
+            data: {
+              labels: sortedEntries.map(e => e[0]),
+              datasets: [{
+                label: 'Temperature distribution',
+                data: sortedEntries.map(e => e[1]),
+                borderWidth: 1
+              }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+              }
+            }
+          });
         },
         error: (err) => {
           alert("Error while fetching the Records");
