@@ -53,11 +53,18 @@ namespace SensorInputProcessor
             };
 
             try {
-                string containerId = "Humidities";
                 Container container = await database.CreateContainerIfNotExistsAsync("Humidities", "/id");
 
-                await container.CreateItemAsync(humidity);
+                int count = 0;
+                QueryDefinition queryDefinition = new("SELECT VALUE COUNT(1) FROM c");
+                var query = container.GetItemQueryIterator<int>(queryDefinition);
+                while (query.HasMoreResults) {
+                    FeedResponse<int> response = await query.ReadNextAsync();
+                    count += response.Resource.FirstOrDefault();
+                }           
+                humidity.id = $"{sensor.Uuid}-{count}";
 
+                await container.CreateItemAsync(humidity);
                 _logger.LogInformation($"Added item in database: {humidity}.");
             }
             catch (CosmosException ex) {
