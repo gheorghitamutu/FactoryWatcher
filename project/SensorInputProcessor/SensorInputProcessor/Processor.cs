@@ -2,6 +2,7 @@ using System;
 using Azure.Messaging.EventHubs;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
+using Sensor;
 
 namespace SensorInputProcessor
 {
@@ -26,6 +27,9 @@ namespace SensorInputProcessor
             {
                 _logger.LogInformation("Event Body: {body}", @event.Body);
                 _logger.LogInformation("Event Content-Type: {contentType}", @event.ContentType);
+
+                var sd = SensorData.Parser.ParseFrom(@event.Body.ToArray());
+                _logger.LogInformation("SensorData: {sensorData}", sd);
             }
         }
     }

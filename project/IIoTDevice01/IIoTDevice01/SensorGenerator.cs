@@ -3,6 +3,7 @@ using Sensor;
 using Google.Protobuf.WellKnownTypes;
 using Google.Protobuf;
 using System.Text;
+using Microsoft.Extensions.Logging;
 
 namespace IIoTDevice01
 {
@@ -25,21 +26,17 @@ namespace IIoTDevice01
             };
         }
 
-        public static async Task SendSensor(DeviceClient iotDevice, SensorData data)
+        public static async Task SendSensor(DeviceClient iotDevice, SensorData data, ILogger logger)
         {
             // Create JSON message
-            var message = new Message(Encoding.UTF8.GetBytes(data.ToString()))
+            var message = new Message(data.ToByteArray())
             {
-                // Add a custom application property to the message.
-                // An IoT hub can filter on these properties without access to the message body.
-                // message.Properties.Add("temperatureAlert", (currentTemperature > 30) ? "true" : "false");
-                ContentType = "application/json",
-                ContentEncoding = "utf-8"
+                ContentType = "application/x-protobuf"
             };
 
             // Send the telemetry message
             await iotDevice.SendEventAsync(message).ConfigureAwait(false);
-            Console.WriteLine("{0} > Sending message: {1}", DateTime.Now, data.ToString());
+            logger.LogInformation("{0} > Sending message: {1}", DateTime.Now, data.ToString());
 
             await Task.Delay(TimeSpan.FromSeconds(1)).ConfigureAwait(false);
         }

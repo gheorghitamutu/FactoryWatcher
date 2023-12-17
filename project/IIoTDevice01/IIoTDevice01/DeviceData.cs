@@ -29,7 +29,7 @@ namespace IIoTDevice01
                     "HostName=iiot-hub.azure-devices.net;DeviceId=iot_device_01;SharedAccessKey=SQrZiCs7THRIS14XkI5GnetjQ44XAcsu2AIoTKM8l8E=");
 
             var response = SensorGenerator.GetSensorResponse();
-            await SensorGenerator.SendSensor(iotDevice, response);
+            await SensorGenerator.SendSensor(iotDevice, response, _logger);
             _logger.LogInformation($"Data sent to IoT Event Hub: {response} at: {DateTime.Now}");
 
             if (myTimer.ScheduleStatus is not null)
