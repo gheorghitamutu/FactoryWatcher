@@ -20,9 +20,9 @@ namespace IIoTDevice01
                 Timestamp = Timestamp.FromDateTime(DateTime.UtcNow),
                 ExtraInfo = "Test message",
                 Status = Status.Ok,
-                Humidity = (float)rand.NextDouble(),
-                Temperature = (float)rand.NextDouble(),
-                Pressure = (float)rand.NextDouble(),
+                Humidity = rand.NextDouble() * 100.0f,
+                Temperature = rand.NextDouble() * (100.0f - -100.0f) + -100.0f,
+                Pressure = 1010.0f + rand.NextDouble() * 10.0f,
             };
         }
 
