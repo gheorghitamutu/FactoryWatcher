@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "SensorInputProcessor": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7174"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "httpPort": 32015,
+      "useSSL": false
+    }
+  }
+}
