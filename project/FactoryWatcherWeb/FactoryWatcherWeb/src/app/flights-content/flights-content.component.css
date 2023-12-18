@@ -1,0 +1,41 @@
+@import url(http://fonts.googleapis.com/css?family=Calibri:400,300,700);
+
+.form {
+  display: flex;
+}
+
+mat-form-field {
+  width: 100%;
+  display:block;
+}
+
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  align-items: flex-start;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+
+
+
+/*.mat-toolbar {*/
+/*  margin-bottom: 10px;*/
+/*}*/
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.example-list-wrapping {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+p {
+  width: 250px;
+}

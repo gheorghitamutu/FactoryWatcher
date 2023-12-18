@@ -1,15 +1,15 @@
-﻿namespace FactoryWatcher.Models.Models
+﻿using Newtonsoft.Json;
+
+namespace FactoryWatcher.Models.Models
 {
-    public class Temperature
+    public class Temperature: BaseEntity
     {
         public Temperature()
         {
             Id = Guid.NewGuid();
         }
 
-        public Guid Id { get; private set; }
-        public string SensorName { get; private set; }
-
+        [JsonProperty("value")]
         public double Value { get; private set; }
     }
 }
