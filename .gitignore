@@ -400,4 +400,5 @@ FodyWeavers.xsd
 # Rust
 **/target/**
 Cargo.lock
-/project/FactoryWatcherWeb/FactoryWatcherWeb/src/app
+AMDD/.DS_Store
+.DS_Store
