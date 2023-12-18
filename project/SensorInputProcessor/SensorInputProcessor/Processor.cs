@@ -26,23 +26,7 @@ namespace SensorInputProcessor
             public float value { get; set; }
         }
 
-        public async Task AddSensorDataToDatabase(SensorData sensor) {
-            // The Azure Cosmos DB endpoint for running this sample.
-            string EndpointUri = "https://taipcosmosdb.documents.azure.com:443/";
-
-            // The primary key for the Azure Cosmos account.
-            string PrimaryKey = "XP9V3jmzRBJwQY85hqoWdPBXYXnknmWhy1t7A4rmNaRcRwMoIFW8VdgRYzktvXooTld4fbelD9OtACDb7X4HAw==";
-
-            CosmosClient cosmosClient = new(
-                EndpointUri, 
-                PrimaryKey, 
-                new CosmosClientOptions() { 
-                    ApplicationName = "SensorDataProcessor" 
-                    });
-
-            // The name of the database and container we will create
-            Database database = await cosmosClient.CreateDatabaseIfNotExistsAsync("SensorData");
-
+        public async Task AddHumidityFromSensorToDatabase(SensorData sensor, Database database) {
             Humidity humidity = new Humidity {
                 id = sensor.Uuid,
                 sensor_id = sensor.SensorId.ToString(),
@@ -71,6 +55,35 @@ namespace SensorInputProcessor
                 _logger.LogError($"Failed: {ex.ResponseBody}.");
                 _logger.LogError($"Failed: {humidity}.");
             }
+        }
+
+        public async Task AddSensorDataToDatabase(SensorData sensor) {
+            // The Azure Cosmos DB endpoint for running this sample.
+            string EndpointUri = "https://cosmosrgeastusdc1c20c5-1b8b-4fd4-9798db.documents.azure.com:443/";
+
+            // The primary key for the Azure Cosmos account.
+            string PrimaryKey = "KLN1hg9CKqXUOVua1ZsN1veC5LVmIELeojmMh5HrnLT3C3iOxMFHAY7ScOcjqxQvVH5A17PddmAbACDbhZwEbQ==";
+
+            CosmosClient cosmosClient = new(
+                EndpointUri, 
+                PrimaryKey, 
+                new CosmosClientOptions() { 
+                    ApplicationName = "SensorDataProcessor",
+                    ConnectionMode = ConnectionMode.Gateway 
+                    /*
+                        https://stackoverflow.com/questions/64512182/cosmos-db-the-request-failed-because-the-client-was-unable-to-establish-connect
+                        ConnectionMode = ConnectionMode.Gateway is for Azure CosmosDB trial accounts.
+                        Substatus: 20002; ActivityId: 65fc6fb7-2d79-447e-b31f-547a1b756f3b; 
+                        Reason: (The request failed because the client was unable to establish connections to 3 endpoints across 1 regions. 
+                        Please check for client resource starvation issues and verify connectivity between client and server. 
+                        More info: https://aka.ms/cosmosdb-tsg-service-unavailable
+                    */
+                });
+
+            // The name of the database and container we will create
+            Database database = await cosmosClient.CreateDatabaseIfNotExistsAsync("SensorData");
+
+            await AddHumidityFromSensorToDatabase(sensor, database);
 
             _logger.LogInformation($"C# IoT Hub trigger function processed a message: {sensor}");
 
@@ -80,7 +93,7 @@ namespace SensorInputProcessor
         [Function(nameof(Processor))]
         public async Task Run(
             [EventHubTrigger(
-                "iothub-ehub-iiot-hub-25385295-39f1a2daba", 
+                "iothub-ehub-iiot-main-25403933-cc1476135b", 
                 Connection = "IOT_HUB_CONNECTION_STRING",
                 ConsumerGroup = "$Default"
             )] EventData[] events) {
