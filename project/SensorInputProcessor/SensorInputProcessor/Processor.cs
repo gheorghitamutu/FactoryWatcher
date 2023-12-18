@@ -26,6 +26,16 @@ namespace SensorInputProcessor
             public float value { get; set; }
         }
 
+        public class Temperature 
+        {
+            public string? id { get; set; }
+            public string? sensor_id { get; set; }
+            public DateTime timestamp { get; set; }
+            public string? extra_info { get; set; }
+            public Status status { get; set; }
+            public float value { get; set; }
+        }
+
         public async Task AddHumidityFromSensorToDatabase(SensorData sensor, Database database) {
             Humidity humidity = new Humidity {
                 id = sensor.Uuid,
@@ -57,6 +67,37 @@ namespace SensorInputProcessor
             }
         }
 
+        public async Task AddTemperatureFromSensorToDatabase(SensorData sensor, Database database) {
+            Temperature temperature = new Temperature {
+                id = sensor.Uuid,
+                sensor_id = sensor.SensorId.ToString(),
+                timestamp = sensor.Timestamp.ToDateTime(),
+                extra_info = sensor.ExtraInfo,
+                status = sensor.Status,
+                value = (float) sensor.Temperature
+            };
+
+            try {
+                Container container = await database.CreateContainerIfNotExistsAsync("Temperatures", "/id");
+
+                int count = 0;
+                QueryDefinition queryDefinition = new("SELECT VALUE COUNT(1) FROM c");
+                var query = container.GetItemQueryIterator<int>(queryDefinition);
+                while (query.HasMoreResults) {
+                    FeedResponse<int> response = await query.ReadNextAsync();
+                    count += response.Resource.FirstOrDefault();
+                }           
+                temperature.id = $"{sensor.Uuid}-{count}";
+
+                await container.CreateItemAsync(temperature);
+                _logger.LogInformation($"Added item in database: {temperature}.");
+            }
+            catch (CosmosException ex) {
+                _logger.LogError($"Failed: {ex.ResponseBody}.");
+                _logger.LogError($"Failed: {temperature}.");
+            }
+        }
+
         public async Task AddSensorDataToDatabase(SensorData sensor) {
             // The Azure Cosmos DB endpoint for running this sample.
             string EndpointUri = "https://cosmosrgeastusdc1c20c5-1b8b-4fd4-9798db.documents.azure.com:443/";
@@ -84,6 +125,7 @@ namespace SensorInputProcessor
             Database database = await cosmosClient.CreateDatabaseIfNotExistsAsync("SensorData");
 
             await AddHumidityFromSensorToDatabase(sensor, database);
+            await AddTemperatureFromSensorToDatabase(sensor, database);
 
             _logger.LogInformation($"C# IoT Hub trigger function processed a message: {sensor}");
 
