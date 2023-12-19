@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryWatcher", "FactoryWatcherAPI\FactoryWatcher.csproj", "{561FD5E9-5023-46D7-BC1E-D092ADA4E3F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FactoryWatcher", "FactoryWatcherAPI\FactoryWatcher.csproj", "{561FD5E9-5023-46D7-BC1E-D092ADA4E3F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryWatcher.Models", "FactoryWatcher.Models\FactoryWatcher.Models.csproj", "{4169BE14-CAFF-4210-93BA-CE8FA4545675}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FactoryWatcher.Models", "FactoryWatcher.Models\FactoryWatcher.Models.csproj", "{4169BE14-CAFF-4210-93BA-CE8FA4545675}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryWatcher.DataAccess", "FactoryWatcher.DataAccess\FactoryWatcher.DataAccess.csproj", "{DD029696-433B-4D74-8B7A-E040B2D4E432}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FactoryWatcher.DataAccess", "FactoryWatcher.DataAccess\FactoryWatcher.DataAccess.csproj", "{DD029696-433B-4D74-8B7A-E040B2D4E432}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryWatcher.BusinessLogic", "FactoryWatcher.BusinessLogic\FactoryWatcher.BusinessLogic.csproj", "{89593834-5DC4-4C3A-97E6-2EC923DD7C46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FactoryWatcher.BusinessLogic", "FactoryWatcher.BusinessLogic\FactoryWatcher.BusinessLogic.csproj", "{89593834-5DC4-4C3A-97E6-2EC923DD7C46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryWatcher.API.Tests", "FactoryWatcher.API.Tests\FactoryWatcher.API.Tests.csproj", "{04A15FE0-A45F-4E28-BE05-0D608A82E549}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{89593834-5DC4-4C3A-97E6-2EC923DD7C46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89593834-5DC4-4C3A-97E6-2EC923DD7C46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89593834-5DC4-4C3A-97E6-2EC923DD7C46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04A15FE0-A45F-4E28-BE05-0D608A82E549}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04A15FE0-A45F-4E28-BE05-0D608A82E549}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04A15FE0-A45F-4E28-BE05-0D608A82E549}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04A15FE0-A45F-4E28-BE05-0D608A82E549}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
