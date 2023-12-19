@@ -7,7 +7,6 @@ using Microsoft.Azure.Cosmos;
 using Google.Protobuf;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-// using Microsoft.Azure.Functions.Worker.Extensions.ServiceBus;
 using Azure.Messaging.ServiceBus;
 
 namespace SensorInputProcessor
@@ -236,7 +235,6 @@ namespace SensorInputProcessor
             public string? Alerts { get; set; }
         }
 
-        // [ServiceBusOutput("alerts", Connection = "SERVICE_BUS_CONNECTION_STRING", EntityType = ServiceBusEntityType.Queue)]
         public async Task SendToServiceBus(List<object> alerts) {
             _logger.LogInformation("Alerts: {alerts}", alerts);
 
@@ -247,12 +245,11 @@ namespace SensorInputProcessor
             var queueOrTopicName = "alerts";
             var sender = client.CreateSender(queueOrTopicName);
 
-            var alerts_message = string.Join(", ", alerts);
+            var alerts_message = string.Join("\n", alerts);
             await sender.SendMessageAsync(new ServiceBusMessage(alerts_message));
         }
 
         [Function(nameof(Processor))]
-        // [ServiceBusOutput("alerts", Connection = "SERVICE_BUS_CONNECTION_STRING")]
         public async Task Run(
             [EventHubTrigger(
                 "iothub-ehub-iiot-main-25403933-cc1476135b", 
