@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "IIoTDevice01": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7063"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "httpPort": 33386,
+      "useSSL": false
+    }
+  }
+}
