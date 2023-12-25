@@ -4,11 +4,11 @@ using FactoryWatcher.Models.Models;
 
 namespace FactoryWatcher.BusinessLogic.Mappers
 {
-    public class TemperatureMapper : Profile
+    public class UserMapper : Profile
     {
-        public TemperatureMapper()
+        public UserMapper()
         {
-            CreateMap<Temperature, CreateTemperatureDto>().ReverseMap();
+            CreateMap<User, CreateUserDto>().ReverseMap();
         }
     }
 }

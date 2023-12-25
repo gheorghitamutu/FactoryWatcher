@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using AutoMapper.EquivalencyExpression;
 using FactoryWatcher.BusinessLogic.Mappers;
 
 namespace LabsAndCoursesManagement.BusinessLogic.Mappers
@@ -10,9 +9,8 @@ namespace LabsAndCoursesManagement.BusinessLogic.Mappers
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile(new TemperatureMapper());
-                cfg.AddProfile(new PressureMapper());
-                cfg.AddProfile(new HumidityMapper());
+                cfg.AddProfile(new UserMapper());
+                cfg.AddProfile(new SensorDataMapper());
                 //cfg.AddProfile(new CourseMapper());
                 //cfg.AddCollectionMappers();
             }

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace FactoryWatcher.Models.Models
 {
 
-    public abstract class DtoBaseEntity
+    public class CreateSensorDataDto
     {
         
         [JsonProperty("sensor_id")]
@@ -20,6 +20,17 @@ namespace FactoryWatcher.Models.Models
 
         [JsonProperty("status")]
         public Status Status { get; set; }
+
+        [JsonProperty("humidity")]
+        public float Humidity { get; set; }
+
+
+        [JsonProperty("temperature")]
+        public float Temperature { get; set; }
+
+
+        [JsonProperty("pressure")]
+        public float Pressure { get; set; }
     }
 }
 

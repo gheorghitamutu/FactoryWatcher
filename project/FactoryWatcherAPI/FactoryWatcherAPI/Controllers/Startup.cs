@@ -1,8 +1,5 @@
-﻿using Castle.DynamicProxy;
-using FactoryWatcher.BusinessLogic;
+﻿using FactoryWatcher.BusinessLogic;
 using FactoryWatcher.DataAccess;
-using FactoryWatcher.DataAccess.Repositories;
-using FactoryWatcher.DataAccess.Repositories.Aspects;
 using FactoryWatcher.DataAccess.Repositories.Implementations;
 using FactoryWatcher.Models.Dtos;
 using FactoryWatcher.Models.Models;
@@ -87,16 +84,11 @@ namespace FactoryWatcherAPI.Controllers
                 return cosmosClient;
             });
 
-            services.AddScoped<ICosmosDbRepository<Temperature>, TemperatureCosmosDbRepository>();
-            services.AddScoped<IBaseService<Temperature, CreateTemperatureDto>, BaseService<Temperature, CreateTemperatureDto>>();
+            services.AddScoped<ICosmosDbRepository<SensorData>, SensorDataRepository>();
+            services.AddScoped<IBaseService<SensorData, CreateSensorDataDto>, BaseService<SensorData, CreateSensorDataDto>>();
 
-            services.AddScoped<ICosmosDbRepository<Humidity>, HumidityCosmosDbRepository>();
-            services.AddScoped<IBaseService<Humidity, CreateHumidityDto>, BaseService<Humidity, CreateHumidityDto>>();
-
-            services.AddScoped<ICosmosDbRepository<Pressure>, PressureCosmosDbRepository>();
-            services.AddScoped<IBaseService<Pressure, CreatePressureDto>, BaseService<Pressure, CreatePressureDto>>();
-
-            services.AddScoped<IUserCosmosRepository, UserCosmosRepository>();
+            services.AddScoped<ICosmosDbRepository<FactoryWatcher.Models.Models.User>, UserRepository>();
+            services.AddScoped<IBaseService<FactoryWatcher.Models.Models.User, CreateUserDto>, BaseService<FactoryWatcher.Models.Models.User, CreateUserDto>>();
             return services;
         }
     }

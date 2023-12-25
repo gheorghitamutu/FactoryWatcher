@@ -19,7 +19,7 @@ Chart.register(...registerables);
 
 export class MainContentComponent implements OnInit{
   title = 'clients_manager_front';
-  displayedColumns: string[] = ['id', 'sensorId', 'value', 'timestamp', 'extraInfo'];
+  displayedColumns: string[] = ['id', 'sensorId', 'temperature', 'humidity', 'pressure', 'timestamp', 'extraInfo'];
   dataSource!: MatTableDataSource<any>;
 
   newsData: any[] = [];
@@ -90,7 +90,7 @@ export class MainContentComponent implements OnInit{
 
           for (const measure of res) {
             console.log(measure);
-            let value = Math.round(measure["value"] / 10) * 10
+            let value = Math.round(measure["temperature"] / 10) * 10
             if (intervalsCount.has(value)) {
               // Number is already in the map, increase the count
               const currentCount = intervalsCount.get(value) || 0;

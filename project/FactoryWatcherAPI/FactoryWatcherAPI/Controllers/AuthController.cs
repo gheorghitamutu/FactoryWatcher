@@ -1,5 +1,4 @@
 ﻿using FactoryWatcher.BusinessLogic;
-using FactoryWatcher.DataAccess.Repositories;
 using FactoryWatcher.Models.Dtos;
 using FactoryWatcher.Models.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -16,23 +15,23 @@ namespace FactoryWatcher.Controllers
     public class AuthController : Controller
     {
         private readonly IConfiguration _configuration;
-        private readonly IUserCosmosRepository _userService;
-        private readonly IUserCosmosRepository UserServiceWithLogging;
+        private readonly ICosmosDbRepository<User> _userService;
+        private readonly ICosmosDbRepository<User> UserServiceWithLogging;
 
         private static readonly TimeSpan TokenLifetime = TimeSpan.FromHours(1);
 
-        public AuthController(IConfiguration configuration, IUserCosmosRepository UserService)
+        public AuthController(IConfiguration configuration, ICosmosDbRepository<User> UserService)
         {
             _configuration = configuration;
-            var logger = LoggerFactory.Create(builder => builder.AddConsole()).CreateLogger<BaseServiceDispatch<IUserCosmosRepository>>();
+            var logger = LoggerFactory.Create(builder => builder.AddConsole()).CreateLogger<BaseServiceDispatch<ICosmosDbRepository<User>>>();
             _userService = UserService;
-            UserServiceWithLogging = BaseServiceDispatch<IUserCosmosRepository>.Create(_userService, logger);
+            UserServiceWithLogging = BaseServiceDispatch<ICosmosDbRepository<User>>.Create(_userService, logger);
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<UserModel>> Register(UserDto request)
+        public async Task<ActionResult<User>> Register(CreateUserDto request)
         {
-            IEnumerable<UserModel> users = await UserServiceWithLogging.GetAll();
+            IEnumerable<User> users = await UserServiceWithLogging.GetAll();
 
             foreach (var user in users)
             {
@@ -43,7 +42,7 @@ namespace FactoryWatcher.Controllers
             }
 
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
-            var newUser = new UserModel()
+            var newUser = new User()
             {
                 UserName = request.UserName,
                 PasswordHash = passwordHash,
@@ -55,10 +54,10 @@ namespace FactoryWatcher.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(UserDto request)
+        public async Task<ActionResult<string>> Login(CreateUserDto request)
         {
-            UserModel foundUser = null;
-            IEnumerable<UserModel> users = await UserServiceWithLogging.GetAll();
+            User foundUser = null;
+            IEnumerable<User> users = await UserServiceWithLogging.GetAll();
 
             foreach (var user in users)
             {
@@ -73,7 +72,7 @@ namespace FactoryWatcher.Controllers
                 return BadRequest("User not found");
             }
 
-            if(!VerifyPasswordHash(request.Password, foundUser.PasswordHash, foundUser.PasswordSalt))
+            if (!VerifyPasswordHash(request.Password, foundUser.PasswordHash, foundUser.PasswordSalt))
             {
                 return BadRequest("Wrong password");
             }
@@ -87,10 +86,10 @@ namespace FactoryWatcher.Controllers
         }
 
         [HttpPost("refresh-token")]
-        public async Task<ActionResult<string>> RefreshToken(UserDto request)
+        public async Task<ActionResult<string>> RefreshToken(CreateUserDto request)
         {
-            UserModel foundUser = null;
-            IEnumerable<UserModel> users = await UserServiceWithLogging.GetAll();
+            User foundUser = null;
+            IEnumerable<User> users = await UserServiceWithLogging.GetAll();
 
             foreach (var user in users)
             {
@@ -107,12 +106,12 @@ namespace FactoryWatcher.Controllers
 
             var refreshToken = Request.Cookies["refreshToken"];
 
-            if(!foundUser.RefreshToken.Equals(refreshToken))
+            if (!foundUser.RefreshToken.Equals(refreshToken))
             {
                 return Unauthorized("Invalid Refresh Token!");
             }
-            
-            if(foundUser.TokenExpires < DateTime.UtcNow)
+
+            if (foundUser.TokenExpires < DateTime.UtcNow)
             {
                 return Unauthorized("Token Expired!");
             }
@@ -135,7 +134,7 @@ namespace FactoryWatcher.Controllers
             return refreshToken;
         }
 
-        private async void SetRefreshToken(RefreshToken newRefreshToken, UserModel _user)
+        private async void SetRefreshToken(RefreshToken newRefreshToken, User _user)
         {
             var cookieOptions = new CookieOptions
             {
@@ -153,7 +152,7 @@ namespace FactoryWatcher.Controllers
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
-            using(var hmac = new HMACSHA512())
+            using (var hmac = new HMACSHA512())
             {
                 passwordSalt = hmac.Key;
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
@@ -162,14 +161,14 @@ namespace FactoryWatcher.Controllers
 
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
-            using(var hmac = new HMACSHA512(passwordSalt))
+            using (var hmac = new HMACSHA512(passwordSalt))
             {
                 var computeHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
                 return computeHash.SequenceEqual(passwordHash);
             }
         }
 
-        private string CreateToken(UserModel user)
+        private string CreateToken(User user)
         {
             List<Claim> claims = new List<Claim>
             {

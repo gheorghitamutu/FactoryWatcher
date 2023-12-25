@@ -1,8 +1,5 @@
 using AutoMapper;
-using Bogus;
 using FactoryWatcher.BusinessLogic;
-using FactoryWatcher.Models.Dtos;
-using FactoryWatcher.Models.Helpers;
 using FactoryWatcher.Models.Models;
 using FluentAssertions;
 using LabsAndCoursesManagement.BusinessLogic.Mappers;
@@ -11,10 +8,10 @@ using Moq;
 
 namespace FactoryWatcher.API.Tests
 {
-    public class UnitTest1
+    public class SensorsTests
     {
         private IMapper _mapper;
-        public UnitTest1()
+        public SensorsTests()
         {
             // Configure AutoMapper mappings
             AutoMapperBuilder autoMapperBuilder = new();
@@ -25,21 +22,17 @@ namespace FactoryWatcher.API.Tests
         public async void When_AddNewEntry_Then_ShouldReturnCreated()
         {
             // Arrange
-            var mockCosmosDbRepository = new Mock<ICosmosDbRepository<Humidity>>();
+            var mockCosmosDbRepository = new Mock<ICosmosDbRepository<SensorData>>();
 
-            var dto = new CreateHumidityDto
-            {
-                SensorId = Guid.NewGuid(),
-                Timestamp = DateTime.Now,
-            };
+            var dto = CreateSUT();
 
-            var responseMock = new Mock<ItemResponse<Humidity>>();
+            var responseMock = new Mock<ItemResponse<SensorData>>();
             responseMock.Setup(x => x.StatusCode).Returns(
                System.Net.HttpStatusCode.Created
             );
 
-            mockCosmosDbRepository.Setup(x => x.Add(It.IsAny<Humidity>())).Returns(Task.FromResult(responseMock.Object));
-            var service = new BaseService<Humidity, CreateHumidityDto>(mockCosmosDbRepository.Object);
+            mockCosmosDbRepository.Setup(x => x.Add(It.IsAny<SensorData>())).Returns(Task.FromResult(responseMock.Object));
+            var service = new BaseService<SensorData, CreateSensorDataDto>(mockCosmosDbRepository.Object);
 
             // Act 
             var serviceResponse = await service.Add(dto);
@@ -51,17 +44,17 @@ namespace FactoryWatcher.API.Tests
         public async void When_AddWrongEntry_Then_ShouldReturnBadRequest()
         {
             // Arrange
-            var mockCosmosDbRepository = new Mock<ICosmosDbRepository<Humidity>>();
+            var mockCosmosDbRepository = new Mock<ICosmosDbRepository<SensorData>>();
             var dto = CreateSUT();
 
 
-            var responseMock = new Mock<ItemResponse<Humidity>>();
+            var responseMock = new Mock<ItemResponse<SensorData>>();
             responseMock.Setup(x => x.StatusCode).Returns(
                System.Net.HttpStatusCode.BadRequest
             );
 
-            mockCosmosDbRepository.Setup(x => x.Add(It.IsAny<Humidity>())).Returns(Task.FromResult(responseMock.Object));
-            var service = new BaseService<Humidity, CreateHumidityDto>(mockCosmosDbRepository.Object);
+            mockCosmosDbRepository.Setup(x => x.Add(It.IsAny<SensorData>())).Returns(Task.FromResult(responseMock.Object));
+            var service = new BaseService<SensorData, CreateSensorDataDto>(mockCosmosDbRepository.Object);
 
             // Act 
             var serviceResponse = await service.Add(dto);
@@ -73,18 +66,18 @@ namespace FactoryWatcher.API.Tests
         public async void When_GetAll_Then_ShouldReturnAllItems()
         {
             // Arrange
-            var mockCosmosDbRepository = new Mock<ICosmosDbRepository<Humidity>>();
+            var mockCosmosDbRepository = new Mock<ICosmosDbRepository<SensorData>>();
 
             var dto = CreateSUT();
-            var humidity = _mapper.Map<CreateHumidityDto, Humidity>(dto);
+            var SensorData = _mapper.Map<CreateSensorDataDto, SensorData>(dto);
 
-            var responseMock = new Mock<ItemResponse<Humidity>>();
+            var responseMock = new Mock<ItemResponse<SensorData>>();
             responseMock.Setup(x => x.StatusCode).Returns(
                System.Net.HttpStatusCode.Created
             );
 
-            mockCosmosDbRepository.Setup(x => x.GetAll()).Returns(Task.FromResult((IEnumerable<Humidity>) new List<Humidity> { humidity }));
-            var service = new BaseService<Humidity, CreateHumidityDto>(mockCosmosDbRepository.Object);
+            mockCosmosDbRepository.Setup(x => x.GetAll()).Returns(Task.FromResult((IEnumerable<SensorData>) new List<SensorData> { SensorData }));
+            var service = new BaseService<SensorData, CreateSensorDataDto>(mockCosmosDbRepository.Object);
 
             // Act 
             var serviceResponse = await service.GetAll();
@@ -96,24 +89,24 @@ namespace FactoryWatcher.API.Tests
         public async void When_GetById_Then_ShouldReturnSpecificItem()
         {
             // Arrange
-            var mockCosmosDbRepository = new Mock<ICosmosDbRepository<Humidity>>();
+            var mockCosmosDbRepository = new Mock<ICosmosDbRepository<SensorData>>();
 
             var dto = CreateSUT();
-            var humidity = _mapper.Map<CreateHumidityDto, Humidity>(dto);
+            var SensorData = _mapper.Map<CreateSensorDataDto, SensorData>(dto);
 
-            var responseMock = new Mock<ItemResponse<Humidity>>();
+            var responseMock = new Mock<ItemResponse<SensorData>>();
             responseMock.Setup(x => x.StatusCode).Returns(
                System.Net.HttpStatusCode.OK
             );
             responseMock.Setup(x => x.Resource).Returns(
-              humidity
+              SensorData
            );
 
             mockCosmosDbRepository.Setup(x => x.GetByIdAndPartitionKey(It.IsAny<string>())).Returns(Task.FromResult(responseMock.Object));
-            var service = new BaseService<Humidity, CreateHumidityDto>(mockCosmosDbRepository.Object);
+            var service = new BaseService<SensorData, CreateSensorDataDto>(mockCosmosDbRepository.Object);
 
             // Act 
-            var serviceResponse = await service.GetById(humidity.Id.ToString());
+            var serviceResponse = await service.GetById(SensorData.Id.ToString());
             // Assert
             serviceResponse.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
             serviceResponse.Resource.SensorId.Should().Be(dto.SensorId);
@@ -124,15 +117,15 @@ namespace FactoryWatcher.API.Tests
         public async void When_GetByInexistentId_Then_ShouldReturnNotFound()
         {
             // Arrange
-            var mockCosmosDbRepository = new Mock<ICosmosDbRepository<Humidity>>();
+            var mockCosmosDbRepository = new Mock<ICosmosDbRepository<SensorData>>();
 
-            var responseMock = new Mock<ItemResponse<Humidity>>();
+            var responseMock = new Mock<ItemResponse<SensorData>>();
             responseMock.Setup(x => x.StatusCode).Returns(
                System.Net.HttpStatusCode.NotFound
             );
 
             mockCosmosDbRepository.Setup(x => x.GetByIdAndPartitionKey(It.IsAny<string>())).Returns(Task.FromResult(responseMock.Object));
-            var service = new BaseService<Humidity, CreateHumidityDto>(mockCosmosDbRepository.Object);
+            var service = new BaseService<SensorData, CreateSensorDataDto>(mockCosmosDbRepository.Object);
 
             // Act 
             var serviceResponse = await service.GetById("inexistent");
@@ -140,9 +133,9 @@ namespace FactoryWatcher.API.Tests
             serviceResponse.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
         }
 
-        private static CreateHumidityDto CreateSUT()
+        private static CreateSensorDataDto CreateSUT()
         {
-            return new CreateHumidityDto
+            return new CreateSensorDataDto
             {
                 SensorId = Guid.NewGuid(),
                 Timestamp = DateTime.Now,
