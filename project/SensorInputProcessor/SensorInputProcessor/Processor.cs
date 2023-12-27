@@ -16,139 +16,22 @@ namespace SensorInputProcessor
         private readonly ILogger<Processor> _logger;
 
         // https://learn.microsoft.com/en-us/dotnet/api/microsoft.azure.cosmos.container.replacethroughputasync?view=azure-dotnet
-        private readonly int throughPut = 1400;
+        private readonly int throughPut = 1000;
+
+        class Data {
+            public string? id;
+            public string? uuid;
+            public int sensorId;
+            public DateTime timestamp;
+            public string? extraInfo;
+            public Status status;
+            public double humidity;
+            public double temperature;
+            public double pressure;
+        }
 
         public Processor(ILogger<Processor> logger) {
             _logger = logger;
-        }
-
-        public class Humidity 
-        {
-            public string? id { get; set; }
-            public string? sensor_id { get; set; }
-            public DateTime timestamp { get; set; }
-            public string? extra_info { get; set; }
-            public Status status { get; set; }
-            public float value { get; set; }
-        }
-
-        public class Temperature 
-        {
-            public string? id { get; set; }
-            public string? sensor_id { get; set; }
-            public DateTime timestamp { get; set; }
-            public string? extra_info { get; set; }
-            public Status status { get; set; }
-            public float value { get; set; }
-        }
-
-        public class Pressure 
-        {
-            public string? id { get; set; }
-            public string? sensor_id { get; set; }
-            public DateTime timestamp { get; set; }
-            public string? extra_info { get; set; }
-            public Status status { get; set; }
-            public float value { get; set; }
-        }
-
-        public async Task AddHumidityFromSensorToDatabase(SensorData sensor, Database database) {
-            Humidity humidity = new Humidity {
-                id = sensor.Uuid,
-                sensor_id = sensor.SensorId.ToString(),
-                timestamp = sensor.Timestamp.ToDateTime(),
-                extra_info = sensor.ExtraInfo,
-                status = sensor.Status,
-                value = (float) sensor.Humidity
-            };
-
-            try {
-                Container container = await database.CreateContainerIfNotExistsAsync("Humidities", "/id");
-                await container.ReplaceThroughputAsync(ThroughputProperties.CreateManualThroughput(throughPut));
-                await container.ReplaceThroughputAsync(ThroughputProperties.CreateAutoscaleThroughput(throughPut));
-
-                int count = 0;
-                QueryDefinition queryDefinition = new("SELECT VALUE COUNT(1) FROM c");
-                var query = container.GetItemQueryIterator<int>(queryDefinition);
-                while (query.HasMoreResults) {
-                    FeedResponse<int> response = await query.ReadNextAsync();
-                    count += response.Resource.FirstOrDefault();
-                }           
-                humidity.id = $"{sensor.Uuid}-{count}";
-
-                await container.CreateItemAsync(humidity);
-                _logger.LogInformation($"Added item in database: {humidity}.");
-            }
-            catch (CosmosException ex) {
-                //_logger.LogError($"Failed: {ex.ResponseBody}.");
-                //_logger.LogError($"Failed: {humidity}.");
-            }
-        }
-
-        public async Task AddTemperatureFromSensorToDatabase(SensorData sensor, Database database) {
-            Temperature temperature = new Temperature {
-                id = sensor.Uuid,
-                sensor_id = sensor.SensorId.ToString(),
-                timestamp = sensor.Timestamp.ToDateTime(),
-                extra_info = sensor.ExtraInfo,
-                status = sensor.Status,
-                value = (float) sensor.Temperature
-            };
-
-            try {
-                Container container = await database.CreateContainerIfNotExistsAsync("Temperatures", "/id");
-                await container.ReplaceThroughputAsync(ThroughputProperties.CreateManualThroughput(throughPut));
-                await container.ReplaceThroughputAsync(ThroughputProperties.CreateAutoscaleThroughput(throughPut));
-
-                int count = 0;
-                QueryDefinition queryDefinition = new("SELECT VALUE COUNT(1) FROM c");
-                var query = container.GetItemQueryIterator<int>(queryDefinition);
-                while (query.HasMoreResults) {
-                    FeedResponse<int> response = await query.ReadNextAsync();
-                    count += response.Resource.FirstOrDefault();
-                }           
-                temperature.id = $"{sensor.Uuid}-{count}";
-
-                await container.CreateItemAsync(temperature);
-                _logger.LogInformation($"Added item in database: {temperature}.");
-            }
-            catch (CosmosException ex) {
-                //_logger.LogError($"Failed: {ex.ResponseBody}.");
-                //_logger.LogError($"Failed: {temperature}.");
-            }
-        }
-
-        public async Task AddPressureFromSensorToDatabase(SensorData sensor, Database database) {
-            Pressure pressure = new Pressure {
-                id = sensor.Uuid,
-                sensor_id = sensor.SensorId.ToString(),
-                timestamp = sensor.Timestamp.ToDateTime(),
-                extra_info = sensor.ExtraInfo,
-                status = sensor.Status,
-                value = (float) sensor.Pressure
-            };
-
-            try {
-                Container container = await database.CreateContainerIfNotExistsAsync("Pressures", "/id");
-                await container.ReplaceThroughputAsync(ThroughputProperties.CreateManualThroughput(throughPut));
-                await container.ReplaceThroughputAsync(ThroughputProperties.CreateAutoscaleThroughput(throughPut));
-
-                int count = 0;
-                QueryDefinition queryDefinition = new("SELECT VALUE COUNT(1) FROM c");
-                var query = container.GetItemQueryIterator<int>(queryDefinition);
-                while (query.HasMoreResults) {
-                    FeedResponse<int> response = await query.ReadNextAsync();
-                    count += response.Resource.FirstOrDefault();
-                }           
-                pressure.id = $"{sensor.Uuid}-{count}";
-
-                await container.CreateItemAsync(pressure);
-                _logger.LogInformation($"Added item in database: {pressure}.");
-            }
-            catch (CosmosException ex) {
-                //_logger.LogError($"Failed: {ex.ResponseBody}.");
-                //_logger.LogError($"Failed: {pressure}.");
-            }
         }
 
         public async Task AddSensorDataToDatabase(SensorData sensor) {
@@ -177,9 +60,38 @@ namespace SensorInputProcessor
             // The name of the database and container we will create
             Database database = await cosmosClient.CreateDatabaseIfNotExistsAsync("SensorData");
 
-            await AddHumidityFromSensorToDatabase(sensor, database);
-            await AddTemperatureFromSensorToDatabase(sensor, database);
-            await AddPressureFromSensorToDatabase(sensor, database);
+            try {
+                Container container = await database.CreateContainerIfNotExistsAsync("SensorData", "/id");
+                // await container.ReplaceThroughputAsync(ThroughputProperties.CreateManualThroughput(throughPut));
+                // await container.ReplaceThroughputAsync(ThroughputProperties.CreateAutoscaleThroughput(throughPut));
+
+                int count = 0;
+                QueryDefinition queryDefinition = new("SELECT VALUE COUNT(1) FROM c");
+                var query = container.GetItemQueryIterator<int>(queryDefinition);
+                while (query.HasMoreResults) {
+                    FeedResponse<int> response = await query.ReadNextAsync();
+                    count += response.Resource.FirstOrDefault();
+                }
+
+                var data = new Data {
+                    id = sensor.Uuid,
+                    uuid = $"{sensor.Uuid}-{count}",
+                    sensorId = sensor.SensorId,
+                    timestamp = sensor.Timestamp.ToDateTime(),
+                    extraInfo = sensor.ExtraInfo,
+                    status = sensor.Status,
+                    humidity = sensor.Humidity,
+                    temperature = sensor.Temperature,
+                    pressure = sensor.Pressure
+                };
+
+                await container.CreateItemAsync(data);
+                _logger.LogInformation($"Added item in database: {data}.");
+            }
+            catch (CosmosException ex) {
+                _logger.LogError($"Failed: {ex.ResponseBody}.");
+                _logger.LogError($"Failed: {sensor}.");
+            }
 
             _logger.LogInformation($"C# IoT Hub trigger function processed a message: {sensor}");
 
