@@ -74,8 +74,8 @@ namespace SensorInputProcessor
                 }
 
                 var data = new Data {
-                    id = sensor.Uuid,
-                    uuid = $"{sensor.Uuid}-{count}",
+                    id = Guid.NewGuid().ToString(),
+                    uuid = sensor.Uuid,
                     sensorId = sensor.SensorId,
                     timestamp = sensor.Timestamp.ToDateTime(),
                     extraInfo = sensor.ExtraInfo,

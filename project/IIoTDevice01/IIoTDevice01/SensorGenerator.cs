@@ -16,7 +16,7 @@ namespace IIoTDevice01
             return new SensorData
             {
                 Uuid = "22309216-3531-4f53-b8e5-e2453aa44cea", // Guid.NewGuid().ToString(),
-                SensorId = 1,
+                SensorId = "00000000-0000-0000-0000-000000000000",
                 Timestamp = Timestamp.FromDateTime(DateTime.UtcNow),
                 ExtraInfo = "Test message",
                 Status = Status.Ok,
