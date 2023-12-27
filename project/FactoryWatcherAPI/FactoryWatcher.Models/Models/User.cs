@@ -2,10 +2,13 @@
 
 namespace FactoryWatcher.Models.Models
 {
-    public class UserModel
+    public class User : BaseEntity
     {
-        [JsonProperty("id")]
-        public Guid Id { get; protected set; } = Guid.NewGuid();
+        public User()
+        {
+            Id = Guid.NewGuid();
+        }
+
         [JsonProperty("user_name")]
         public string UserName { get; set; } = string.Empty;
         [JsonProperty("password_hash")]

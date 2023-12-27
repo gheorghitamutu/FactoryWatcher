@@ -18,7 +18,7 @@ export class ApiService {
   }
 
   getPersons() {
-    let result = this.http.get<any>("http://localhost:5000/api/v1/temperatures", {headers: this.headers});
+    let result = this.http.get<any>("http://localhost:5000/api/v1/sensors", {headers: this.headers});
     console.log("test");
     console.log(result);
     return result;

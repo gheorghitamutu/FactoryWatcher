@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 using System.Text.Encodings.Web;
 
 namespace FactoryWatcher.Authentication
@@ -78,6 +76,4 @@ namespace FactoryWatcher.Authentication
             return base.HandleChallengeAsync(properties);
         }
     }
-
-
 }
