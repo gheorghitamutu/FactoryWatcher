@@ -6,6 +6,8 @@
 # Usage of project
 
 ## Database
+https://learn.microsoft.com/en-us/azure/cosmos-db/how-to-develop-emulator?tabs=docker-linux%2Ccsharp&pivots=api-nosql#install-the-emulator
+
 1. Open Azure Cosmos DB Emulator (interface should be available at https://localhost:8081/_explorer/index.html)
 2. Go to Explorer -> New Container. Create a database with name SensorData and 2 collections: one called SensorData and one called Users.
 ## API
