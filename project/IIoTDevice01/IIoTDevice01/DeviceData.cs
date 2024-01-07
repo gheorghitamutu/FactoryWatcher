@@ -26,9 +26,15 @@ namespace IIoTDevice01
                 DeviceClient.CreateFromConnectionString(
                     //"HostName=iiot-hub.azure-devices.net;DeviceId=iot_device_01;SharedAccessKey=SQrZiCs7THRIS14XkI5GnetjQ44XAcsu2AIoTKM8l8E=");
                     "HostName=iiot-main-hub.azure-devices.net;DeviceId=iiot-device-01;SharedAccessKey=D5d2MnkaPpYi6QoY/QbvUL5jBVKZ36ZZaAIoTBGE+WM=");
-            var response = SensorGenerator.GetSensorResponse();
-            await SensorGenerator.SendSensor(iotDevice, response, _logger);
-            _logger.LogInformation($"Data sent to IoT Event Hub: {response} at: {DateTime.Now}");
+            
+            DateTime dataDate = DateTime.Now.AddDays(-30);
+            while (dataDate < DateTime.Now) {
+                var response = SensorGenerator.GenerateSensorResponse(dataDate);
+                await SensorGenerator.SendSensor(iotDevice, response, _logger);
+                _logger.LogInformation($"Data sent to IoT Event Hub: {response} at: {DateTime.Now}");
+                dataDate = dataDate.AddHours(1);
+                await Task.Delay(TimeSpan.FromSeconds(1)).ConfigureAwait(false);
+            }
 
             if (myTimer.ScheduleStatus is not null) {
                 _logger.LogInformation($"Next timer schedule at: {myTimer.ScheduleStatus.Next}");

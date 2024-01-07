@@ -11,13 +11,11 @@ namespace IIoTDevice01
     {
         static Random rand = new Random();
 
-        public static SensorData GetSensorResponse()
-        {
-            return new SensorData
-            {
+        public static SensorData GenerateSensorResponse(DateTime time) {
+            return new SensorData {
                 Uuid = "22309216-3531-4f53-b8e5-e2453aa44cea", // Guid.NewGuid().ToString(),
                 SensorId = "00000000-0000-0000-0000-000000000000",
-                Timestamp = Timestamp.FromDateTime(DateTime.UtcNow),
+                Timestamp = Timestamp.FromDateTime(time.ToUniversalTime()),
                 ExtraInfo = "Test message",
                 Status = Status.Ok,
                 Humidity = rand.NextDouble() * 100.0f,
@@ -26,19 +24,15 @@ namespace IIoTDevice01
             };
         }
 
-        public static async Task SendSensor(DeviceClient iotDevice, SensorData data, ILogger logger)
-        {
+        public static async Task SendSensor(DeviceClient iotDevice, SensorData data, ILogger logger) {
             // Create JSON message
-            var message = new Message(data.ToByteArray())
-            {
+            var message = new Message(data.ToByteArray()) {
                 ContentType = "application/x-protobuf"
             };
 
             // Send the telemetry message
             await iotDevice.SendEventAsync(message).ConfigureAwait(false);
             logger.LogInformation("{0} > Sending message: {1}", DateTime.Now, data.ToString());
-
-            await Task.Delay(TimeSpan.FromSeconds(1)).ConfigureAwait(false);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Sensor {
           string.Concat(
             "ChFzZW5zb3JfZGF0YS5wcm90bxIGU2Vuc29yGh9nb29nbGUvcHJvdG9idWYv",
             "dGltZXN0YW1wLnByb3RvIskBCgpTZW5zb3JEYXRhEgwKBHV1aWQYASABKAkS",
-            "EQoJc2Vuc29yX2lkGAIgASgFEi0KCXRpbWVzdGFtcBgDIAEoCzIaLmdvb2ds",
+            "EQoJc2Vuc29yX2lkGAIgASgJEi0KCXRpbWVzdGFtcBgDIAEoCzIaLmdvb2ds",
             "ZS5wcm90b2J1Zi5UaW1lc3RhbXASEgoKZXh0cmFfaW5mbxgEIAEoCRIeCgZz",
             "dGF0dXMYBSABKA4yDi5TZW5zb3IuU3RhdHVzEhAKCGh1bWlkaXR5GAYgASgB",
             "EhAKCHByZXNzdXJlGAcgASgBEhMKC3RlbXBlcmF0dXJlGAggASgBKigKBlN0",
@@ -116,13 +116,13 @@ namespace Sensor {
 
     /// <summary>Field number for the "sensor_id" field.</summary>
     public const int SensorIdFieldNumber = 2;
-    private int sensorId_;
+    private string sensorId_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int SensorId {
+    public string SensorId {
       get { return sensorId_; }
       set {
-        sensorId_ = value;
+        sensorId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -232,7 +232,7 @@ namespace Sensor {
     public override int GetHashCode() {
       int hash = 1;
       if (Uuid.Length != 0) hash ^= Uuid.GetHashCode();
-      if (SensorId != 0) hash ^= SensorId.GetHashCode();
+      if (SensorId.Length != 0) hash ^= SensorId.GetHashCode();
       if (timestamp_ != null) hash ^= Timestamp.GetHashCode();
       if (ExtraInfo.Length != 0) hash ^= ExtraInfo.GetHashCode();
       if (Status != global::Sensor.Status.Ok) hash ^= Status.GetHashCode();
@@ -261,9 +261,9 @@ namespace Sensor {
         output.WriteRawTag(10);
         output.WriteString(Uuid);
       }
-      if (SensorId != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(SensorId);
+      if (SensorId.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(SensorId);
       }
       if (timestamp_ != null) {
         output.WriteRawTag(26);
@@ -303,9 +303,9 @@ namespace Sensor {
         output.WriteRawTag(10);
         output.WriteString(Uuid);
       }
-      if (SensorId != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(SensorId);
+      if (SensorId.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(SensorId);
       }
       if (timestamp_ != null) {
         output.WriteRawTag(26);
@@ -344,8 +344,8 @@ namespace Sensor {
       if (Uuid.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Uuid);
       }
-      if (SensorId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(SensorId);
+      if (SensorId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(SensorId);
       }
       if (timestamp_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Timestamp);
@@ -380,7 +380,7 @@ namespace Sensor {
       if (other.Uuid.Length != 0) {
         Uuid = other.Uuid;
       }
-      if (other.SensorId != 0) {
+      if (other.SensorId.Length != 0) {
         SensorId = other.SensorId;
       }
       if (other.timestamp_ != null) {
@@ -423,8 +423,8 @@ namespace Sensor {
             Uuid = input.ReadString();
             break;
           }
-          case 16: {
-            SensorId = input.ReadInt32();
+          case 18: {
+            SensorId = input.ReadString();
             break;
           }
           case 26: {
@@ -473,8 +473,8 @@ namespace Sensor {
             Uuid = input.ReadString();
             break;
           }
-          case 16: {
-            SensorId = input.ReadInt32();
+          case 18: {
+            SensorId = input.ReadString();
             break;
           }
           case 26: {

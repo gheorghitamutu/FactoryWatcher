@@ -21,7 +21,7 @@ namespace SensorInputProcessor
         class Data {
             public string? id;
             public string? uuid;
-            public int sensorId;
+            public string? sensorId;
             public DateTime timestamp;
             public string? extraInfo;
             public Status status;
@@ -141,8 +141,7 @@ namespace SensorInputProcessor
             return alerts;
         }
 
-        public class TriggerServiceBusFunctionOutput
-        {
+        public class TriggerServiceBusFunctionOutput {
             [ServiceBusOutput("alerts", Connection = "SERVICE_BUS_CONNECTION_STRING")]
             public string? Alerts { get; set; }
         }
@@ -178,7 +177,7 @@ namespace SensorInputProcessor
                 await AddSensorDataToDatabase(sd);
                 var alerts = GetAlerts(sd);
                 if (alerts.Count > 0) {
-                    await SendToServiceBus(alerts);
+                    // await SendToServiceBus(alerts);
                 }
             }
         }
