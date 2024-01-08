@@ -16,6 +16,7 @@ public class CosmosDbRepository<T> : ICosmosDbRepository<T> where T : BaseEntity
 
         // Get or create the container based on configuration
         var database = _cosmosClient.GetDatabase(cosmosDbSettings.Value.DatabaseId);
+        database.CreateContainerIfNotExistsAsync(containerId, "/id").Wait();
         _container = database.GetContainer(containerId);
     }
 

@@ -12,7 +12,7 @@ enum Status {
 
 message SensorData {
   string uuid = 1;
-  int32 sensor_id = 2;
+  string sensor_id = 2;
   google.protobuf.Timestamp timestamp = 3;
   string extra_info = 4;
   Status status = 5;

@@ -79,6 +79,7 @@ namespace FactoryWatcherAPI.Controllers
                     new CosmosClientOptions
                     {
                         // Additional configuration options if needed
+                        ConnectionMode = ConnectionMode.Gateway
                     });
 
                 return cosmosClient;
