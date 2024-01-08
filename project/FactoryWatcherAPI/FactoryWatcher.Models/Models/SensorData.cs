@@ -17,7 +17,7 @@ namespace FactoryWatcher.Models.Models
         public DateTime Timestamp { get; protected set; }
 
 
-        [JsonProperty("extra_info")]
+        [JsonProperty("extraInfo")]
         public String ExtraInfo { get; protected set; }
 
 

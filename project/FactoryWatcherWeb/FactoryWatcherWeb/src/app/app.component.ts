@@ -1,17 +1,34 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {DialogComponent} from "./dialog/dialog.component";
-import {ApiService} from "./services/api.service";
-
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import { Component, OnInit } from '@angular/core';
+import { TokenStorageService } from './_services/token-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  isInted = false;
+  isLoggedIn = false;
+  showModeratorBoard = false;
+  username?: string;
 
+  constructor(private tokenStorageService: TokenStorageService, private router: Router) { }
+
+  ngOnInit(): void {
+    
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    this.isInted = true;
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      console.log("user is", user);
+      this.username = user;
+    }
+  }
+
+  logout(): void {
+    this.tokenStorageService.signOut();
+    this.router.navigate(['/']).then( 
+      () => window.location.reload());
+  }
 }

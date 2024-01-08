@@ -32,7 +32,6 @@ namespace FactoryWatcher.Authentication
         {
             // Implement your custom JWT authentication logic here
             var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty);
-
             if (string.IsNullOrEmpty(token))
             {
                 // Token is missing, authentication fails

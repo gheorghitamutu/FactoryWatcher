@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Collections.Generic;
 
 namespace FactoryWatcher.Controllers
 {
@@ -81,8 +82,12 @@ namespace FactoryWatcher.Controllers
 
             var refreshToken = GenerateRefreshToken();
             SetRefreshToken(refreshToken, foundUser);
+            var dict = new Dictionary<string, string>
+            {
+                {"token", token}
+            };
 
-            return Ok(token);
+            return Ok(dict);
         }
 
         [HttpPost("refresh-token")]

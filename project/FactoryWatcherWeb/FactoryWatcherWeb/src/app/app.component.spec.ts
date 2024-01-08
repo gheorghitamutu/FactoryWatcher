@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'clients_manager_front'`, () => {
+  it(`should have as title 'auth_factory_watcher'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('clients_manager_front');
+    expect(app.title).toEqual('auth_factory_watcher');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('clients_manager_front app is running!');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, auth_factory_watcher');
   });
 });

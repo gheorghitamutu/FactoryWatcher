@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FactoryWatcherAPI.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/v{version:apiVersion}/sensors")]
     [ApiController]
     [ApiVersion("1.0")]
