@@ -41,6 +41,7 @@ FactoryWatcher: Sophisticated Component Surveillance
   - [5. Data Analytics Risks](#5-data-analytics-risks)
   - [6. Cost Overruns Risks](#6-cost-overruns-risks)
   - [7.Interoperability Risks](#7interoperability-risks)
+- [Our solution](#our-solution)
 
 ## Project description
 
@@ -304,3 +305,23 @@ Mitigation: Thoroughly plan the project budget, track expenses, and adjust as ne
 
 Risk: Compatibility issues with existing factory systems.\
 Mitigation: Ensure compatibility testing and work on integration solutions.
+
+## Our solution
+
+Our proposed solution from an architecture point of view is thoroughly explained in section [Design patterns](design_patterns/README.md) along with several PoCs demonstrating model generation (C# & Rust) from Protobuf and an EMF model in Java. Beside the design patterns implement we also added Azure, C4 and UML diagrams that can be found [here](./diagrams/README.md).
+
+AMDD is the agile version of Model Driven Development (MDD) and our approach is explained in [AMDD](AMDD/README.md) document.
+
+Business Process Modeling Notation (BPMN), also called Business Process Model and Notation, is an open standard to diagram a business process. We used it for describing our ML model [here](BPMN/README.md).
+
+The design can be broken down in several main components:
+- IIoT devices that connect to a IoT Hub
+- Processors for the said data represented by Azure functions
+- An API that serves all the processed data using a MVC pattern
+- An interface that is used to visualize the data
+- An alerting system that uses buses, queues and Azure integrations (GMail, Outlook) implemented with a low-code system
+- A ML model used from Azure to which we can feed sensor input, train and generate alerts with
+
+In order to run our project you can read [Run instructions](./project/README.md). \
+You can also simulate dummy sensors as it is explained in [here](./project/IIoTDevice01/README.md). \
+And in order to run the interface the instructions can be found [here](./project/FactoryWatcherWeb/FactoryWatcherWeb/README.md).
