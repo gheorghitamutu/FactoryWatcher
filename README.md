@@ -14,6 +14,7 @@ FactoryWatcher: Sophisticated Component Surveillance
   - [Companies](#companies)
 - [Risk Assessment](#risk-assessment)
 - [Our solution](#our-solution)
+- [Results and evaluation](#results-and-evaluation)
 - [Future work](#future-work)
 
 ## Project description
@@ -270,6 +271,32 @@ The design can be broken down in several main components:
 In order to run our project you can read [Run instructions](./project/README.md). \
 You can also simulate dummy sensors as it is explained in [here](./project/IIoTDevice01/README.md). \
 And in order to run the interface the instructions can be found [here](./project/FactoryWatcherWeb/FactoryWatcherWeb/README.md).
+
+## Results and evalution
+We demonstrated that we can create an MVP with almost no costs in the cloud. \
+Our solution uses mostly free services from Azure (from the IoT Hub to the CosmosDB) with a throughput of maximum 8k events per day. \
+The metrics and reports are already integrated into the platform and each service has their own, along with logs and traces. \
+We are able to manage the costs via platform features.
+
+### CosmosDB metrics
+![metrics](./assets/cosmosdb_metrics.png)
+
+### CosmosDB monitoring
+![monitoring](./assets/comosdb_monitoring.png)
+
+### IoT Hub metrics
+![metrics](./assets/iot_hub_metrics.png)
+
+### Service Bus metrics
+![metrics](./assets/service_bus_metrics.png)
+
+### Logic App (Mail sender) metrics
+![metrics](./assets/logic_app_mail_sender_metrics.png)
+
+### Costs analysis
+![costs](./assets/costs.png)
+
+![costs2](./assets/costs2.png)
 
 ## Future Work
 We are looking to extend the current capabilities of our platform as it follows:
