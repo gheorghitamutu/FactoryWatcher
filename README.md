@@ -14,6 +14,7 @@ FactoryWatcher: Sophisticated Component Surveillance
   - [Companies](#companies)
 - [Risk Assessment](#risk-assessment)
 - [Our solution](#our-solution)
+- [Future work](#future-work)
 
 ## Project description
 
@@ -269,3 +270,13 @@ The design can be broken down in several main components:
 In order to run our project you can read [Run instructions](./project/README.md). \
 You can also simulate dummy sensors as it is explained in [here](./project/IIoTDevice01/README.md). \
 And in order to run the interface the instructions can be found [here](./project/FactoryWatcherWeb/FactoryWatcherWeb/README.md).
+
+## Future Work
+We are looking to extend the current capabilities of our platform as it follows:
+- easy deployment and integration of the new sensors
+- a standardization (conversion) layer for the aforementioned sensors regardless of their output
+- a cost efficient ML model as the current one offerd by Azure is too costly for our data throughput
+- easier management of the current sensors in our interface
+- support for multiple companies
+- stress testing methodology ensuring that our solution scales as required
+- tutorials
