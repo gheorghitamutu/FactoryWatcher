@@ -272,6 +272,8 @@ In order to run our project you can read [Run instructions](./project/README.md)
 You can also simulate dummy sensors as it is explained in [here](./project/IIoTDevice01/README.md). \
 And in order to run the interface the instructions can be found [here](./project/FactoryWatcherWeb/FactoryWatcherWeb/README.md).
 
+![dashboard](./assets/dashboard.png)
+
 ## Results and evalution
 We demonstrated that we can create an MVP with almost no costs in the cloud. \
 Our solution uses mostly free services from Azure (from the IoT Hub to the CosmosDB) with a throughput of maximum 8k events per day. \
