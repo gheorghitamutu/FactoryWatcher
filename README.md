@@ -216,6 +216,21 @@ Smart Factory enables compliance with Manufacturing 4.0 or Industry 4.0 by integ
 
 Our unique manufacturing technology enables effective communication between IT and OT systems, allowing all departments with automated devices (such as PLCs or actuators on production and quality floors) and those with devices for data visualization (such as offices and supervision or management areas) to integrate seamlessly. This results in a positive impact on achieving business KPIs, with total control from quality and compliance to speed and efficiency.
 
+This company it's already very experienced in this area:
+- it integrates over 80 brands
+- +100 protocols
+- throughput from millions of devices
+- seamless data control and machine connectivity
+- +100 drivers
+- equipment operates according to SLAs, standards, specifications, performance, uptime, and more
+- improved visibility and responsiveness to prevent unplanned downtime
+- full control over parameters, specifications, rules, restrictions, and policies
+- real-time analysis of equipment status and data for better understanding and prediction based on current conditions and historical data
+- proactive maintenance and issue detection to minimize downtime and improve efficiency
+- facilitated communication between different systems and departments, improving collaboration and overall efficiency
+- centralized and accessible data for better decision-making and performance tracking
+- increased productivity and reduced costs through improved equipment performance and operational efficiency
+
 ### Risk Assessment
 
 #### 1. Data Security and Privacy Risks
