@@ -14,6 +14,7 @@ FactoryWatcher: Sophisticated Component Surveillance
   - [Companies](#companies)
 - [Risk Assessment](#risk-assessment)
 - [Our solution](#our-solution)
+- [AI code generation](#ai-code-generation)
 - [Results and evaluation](#results-and-evaluation)
 - [Future work](#future-work)
 
@@ -273,6 +274,9 @@ You can also simulate dummy sensors as it is explained in [here](./project/IIoTD
 And in order to run the interface the instructions can be found [here](./project/FactoryWatcherWeb/FactoryWatcherWeb/README.md).
 
 ![dashboard](./assets/dashboard.png)
+
+## AI code generation
+We used `GitHub Copilot` in our project in order to write several pieces of Rust, proto & C# code. It was useful if we already have the architecture and several examples in place that it can correlate. The suggestions aren't always matching our use case but with small tweaks, in time, it learns. The provided code doesn't always compiles but it's faster to write it and patch it.
 
 ## Results and evalution
 We demonstrated that we can create an MVP with almost no costs in the cloud. \
