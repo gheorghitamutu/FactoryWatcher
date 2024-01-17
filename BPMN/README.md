@@ -6,4 +6,6 @@ The output is sent in the "ML Malfunction Detection" Layer and is categorised as
 
 - If it is categorised as an error it goes to the "Factory Component" Layer where an alert is generated from it.
 
-  The alert is logged as a foctory specific alert and sent to the "Email System" Layer. There an email is generated and sent to the factory representatives.
+The alert is logged as a foctory specific alert and sent to the "Email System" Layer. There an email is generated and sent to the factory representatives.
+
+![Diagram](./BPMN%20Diagram%20for%20detecting%20and%20sending%20alerts.svg)
