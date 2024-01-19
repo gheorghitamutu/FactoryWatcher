@@ -291,7 +291,20 @@ And in order to run the interface the instructions can be found [here](./project
 ![dashboard](./assets/dashboard.png)
 
 ## AI code generation
-We used `GitHub Copilot` in our project in order to write several pieces of Rust, proto & C# code. It was useful if we already have the architecture and several examples in place that it can correlate. The suggestions aren't always matching our use case but with small tweaks, in time, it learns. The provided code doesn't always compiles but it's faster to write it and patch it.
+We used `GitHub Copilot` in our project in order to write several pieces of Rust, proto & C# code. 
+
+GitHub Copilot is an AI-powered code completion tool developed by GitHub in collaboration with OpenAI. It is designed to assist developers by suggesting whole lines or blocks of code as they write, based on the context of their code and natural language comments. The tool is built on the OpenAI Codex model, which is a descendant of the GPT-3 language model.
+
+The AI was useful if we already had the architecture and several examples in place that it can correlate. \
+The suggestions aren't always matching our use case but with small tweaks, in time, it learns. The provided code doesn't always compiles but it's faster to write it and patch it.
+
+For example, the completion of the first .proto file was off but after learning that we are building sensor events (IIoT) it started suggesting values and metrics as class members accordingly. \
+For the C# project after the model file was generated from the .proto file it started suggesting useful function completion. \
+It helped a lot less for our Rust PoC project compared to the C# one. 
+
+`GitHub Copilot` aims to improve developer productivity by providing quick and context-aware code suggestions, potentially reducing the time and effort required to write code but sometimes it interferes with IDE autocompletion making it harder to decide what you need or an actual workflow.
+
+As other said, the accuracy and quality of code suggestions can drastically vary based on the type of the project and the language used.
 
 ## Results and evalution
 We demonstrated that we can create an MVP with almost no costs in the cloud. \
