@@ -306,6 +306,60 @@ It helped a lot less for our Rust PoC project compared to the C# one.
 
 As other said, the accuracy and quality of code suggestions can drastically vary based on the type of the project and the language used.
 
+We also used GPT-3.5 for code generation, but as observed from the above example, it recommends a nuget that does not exist:
+```c#
+// Install the Microsoft.Azure.Cosmos.Fakes NuGet package
+// Install-Package Microsoft.Azure.Cosmos.Fakes
+
+using Microsoft.Azure.Cosmos.Fakes;
+using Microsoft.Azure.Cosmos;
+
+class Program
+{
+    static void Main()
+    {
+        // Set up the mock CosmosClient
+        using (ShimsContext.Create())
+        {
+            ShimCosmosClient.ConstructorUriStringCosmosClientOptions = (client, uri, authKey, options) =>
+            {
+                // Your mock initialization logic goes here
+            };
+
+            // Create an instance of your class that uses CosmosClient
+            var service = new YourServiceUsingCosmosClient();
+
+            // Perform your tests using the mock CosmosClient
+            var result = service.YourMethod();
+
+            // Assert or validate the result as needed
+        }
+    }
+}
+
+// YourServiceUsingCosmosClient class might look like this
+public class YourServiceUsingCosmosClient
+{
+    private readonly CosmosClient _cosmosClient;
+
+    public YourServiceUsingCosmosClient()
+    {
+        _cosmosClient = new CosmosClient("your-cosmos-db-uri", "your-auth-key");
+    }
+
+    public SomeResult YourMethod()
+    {
+        // Your method implementation that uses _cosmosClient
+        // ...
+
+        // Return some result
+        return new SomeResult();
+    }
+}
+
+```
+However, after specifying a way in which he can mock the desired objects, he was able to create tests that did not need any modifications. It is worth mentioning that the test we provided him was the most complex one, so he could make some inferences in order to change the http verb to be used and check results differently. 
+
 ## Results and evalution
 We demonstrated that we can create an MVP with almost no costs in the cloud. \
 Our solution uses mostly free services from Azure (from the IoT Hub to the CosmosDB) with a throughput of maximum 8k events per day. \
